@@ -1,0 +1,17 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="Vivant_1.0:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/Vivant_1_0_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="Vivant_1.0/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="Vivant_1.0" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Hibernate 5.2.3-5.2.3" />
+          <element id="library" level="project" name="PrimeFaces-5.2" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

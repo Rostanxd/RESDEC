@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>
+        Vivant 1.0
+    </title>
+</h:head>
+<h:body>
+    <h:form id="form">
+        <p:growl id="msj" autoUpdate="true"/>
+        <!--<f:event type="preRenderView" listener="#{CaracteristicaBean.searchLstCrc()}"/>-->
+
+        <p:panelGrid style="margin-top:10px">
+            <f:facet name="header">
+                <p:row>
+                    <p:column colspan="3">Transición de una Configuración a Otra - Contenido</p:column>
+                </p:row>
+            </f:facet>
+
+            <p:row>
+                <p:column>
+                    <p:outputLabel value="Aplicacion base: " for="solAppCod"/>
+                </p:column>
+                <p:column colspan="2">
+                    <p:inputText size="3" value="#{filtradoContenidoBean.appSelected.appCodigo}" id="solAppCod">
+                        <p:ajax event="blur" update="solApp"/>
+                    </p:inputText>
+                    <p:commandButton oncomplete="PF('wdgApp').show()" icon="ui-icon-search" title="View" update=":dlgApp"/>
+                    <p:inputText size="30" value="#{filtradoContenidoBean.appSelected.appDescripcion}" id="solApp" disabled="true"/>
+                </p:column>
+            </p:row>
+
+            <p:row>
+                <p:column>
+                    <p:outputLabel value="Caracteristicas: "/>
+                </p:column>
+                <p:column>
+                    <p:panelGrid columns="5" id="caracteristicasMenu">
+                        <p:selectCheckboxMenu id="Technology" value="#{panelSubctgBean.lstCrcTechnologySelect}" label="Tecnologia" filter="true" filterMatchMode="startsWith" panelStyle="width:750px" style="width: 150px" converter="crcConverterTechnology">
+                            <f:selectItems value="#{panelSubctgBean.lstCrcTechnology}" var="crcSubTch" itemLabel="#{crcSubTch.crcDescripcion}" itemValue="#{crcSubTch}"/>
+                        </p:selectCheckboxMenu>
+                        <p:selectCheckboxMenu id="Dimensions" value="#{panelSubctgBean.lstCrcDimensionsSelect}" label="Dimensiones" filter="true" filterMatchMode="startsWith" panelStyle="width:750px" style="width: 150px" converter="crcConverterDimensions">
+                            <f:selectItems value="#{panelSubctgBean.lstCrcDimensions}" var="crcSubDmd" itemLabel="#{crcSubDmd.crcDescripcion}" itemValue="#{crcSubDmd}"/>
+                        </p:selectCheckboxMenu>
+                        <p:selectCheckboxMenu id="Weight" value="#{panelSubctgBean.lstCrcWeightSelect}" label="Peso" filter="true" filterMatchMode="startsWith" panelStyle="width:750px" style="width: 150px" converter="crcConverterWeight">
+                            <f:selectItems value="#{panelSubctgBean.lstCrcWeight}" var="crcSubWgh" itemLabel="#{crcSubWgh.crcDescripcion}" itemValue="#{crcSubWgh}"/>
+                        </p:selectCheckboxMenu>
+                        <p:selectCheckboxMenu id="sim" value="#{panelSubctgBean.lstCrcSimSelect}" label="SIM" filter="true" filterMatchMode="startsWith" panelStyle="width:750px" style="width: 150px" converter="crcConverterSim">
+                            <f:selectItems value="#{panelSubctgBean.lstCrcSim}" var="crcSubSim" itemLabel="#{crcSubSim.crcDescripcion}" itemValue="#{crcSubSim}"/>
+                        </p:selectCheckboxMenu>
+                        <p:selectCheckboxMenu id="type" value="#{panelSubctgBean.lstCrcTypeSelect}" label="Tipo" filter="true" filterMatchMode="startsWith" panelStyle="width:750px" style="width: 150px" converter="crcConverterType">
+                            <f:selectItems value="#{panelSubctgBean.lstCrcType}" var="crcSubTyp" itemLabel="#{crcSubTyp.crcDescripcion}" itemValue="#{crcSubTyp}"/>
+                        </p:selectCheckboxMenu>
+                        <p:selectCheckboxMenu id="size" value="#{panelSubctgBean.lstCrcSizeSelect}" label="Tamaño" filter="true" filterMatchMode="startsWith" panelStyle="width:750px" style="width: 150px" converter="crcConverterSize">
+                            <f:selectItems value="#{panelSubctgBean.lstCrcSize}" var="crcSubSiz" itemLabel="#{crcSubSiz.crcDescripcion}" itemValue="#{crcSubSiz}"/>
+                        </p:selectCheckboxMenu>
+                        <p:selectCheckboxMenu id="resolution" value="#{panelSubctgBean.lstCrcResolutionSelect}" label="Resolucion" filter="true" filterMatchMode="startsWith" panelStyle="width:750px" style="width: 150px" converter="crcConverterResolution">
+                            <f:selectItems value="#{panelSubctgBean.lstCrcResolution}" var="crcSubRes" itemLabel="#{crcSubRes.crcDescripcion}" itemValue="#{crcSubRes}"/>
+                        </p:selectCheckboxMenu>
+                        <p:selectCheckboxMenu id="multitouch" value="#{panelSubctgBean.lstCrcMultiTouchSelect}" label="Multitouch" filter="true" filterMatchMode="startsWith" panelStyle="width:750px" style="width: 150px" converter="crcConverterMultitouch">
+                            <f:selectItems value="#{panelSubctgBean.lstCrcMultiTouch}" var="crcSubMul" itemLabel="#{crcSubMul.crcDescripcion}" itemValue="#{crcSubMul}"/>
+                        </p:selectCheckboxMenu>
+                        <p:selectCheckboxMenu id="protection" value="#{panelSubctgBean.lstCrcProtectionSelect}" label="Proteccion" filter="true" filterMatchMode="startsWith" panelStyle="width:750px" style="width: 150px" converter="crcConverterProtection">
+                            <f:selectItems value="#{panelSubctgBean.lstCrcProtection}" var="crcSubPro" itemLabel="#{crcSubPro.crcDescripcion}" itemValue="#{crcSubPro}"/>
+                        </p:selectCheckboxMenu>
+                        <p:selectCheckboxMenu id="os" value="#{panelSubctgBean.lstCrcOsSelect}" label="Os" filter="true" filterMatchMode="startsWith" panelStyle="width:750px" style="width: 150px" converter="crcConverterOs">
+                            <f:selectItems value="#{panelSubctgBean.lstCrcOs}" var="crcSubOs" itemLabel="#{crcSubOs.crcDescripcion}" itemValue="#{crcSubOs}"/>
+                        </p:selectCheckboxMenu>
+                        <p:selectCheckboxMenu id="chip" value="#{panelSubctgBean.lstCrcChipsetSelect}" label="Chipset" filter="true" filterMatchMode="startsWith"
+                                              panelStyle="width:750px" style="width: 150px" converter="crcConverterChipset">
+                            <f:selectItems value="#{panelSubctgBean.lstCrcChipset}" var="crcSubChp" itemLabel="#{crcSubChp.crcDescripcion}" itemValue="#{crcSubChp}"/>
+                        </p:selectCheckboxMenu>
+                        <p:selectCheckboxMenu id="cpu" value="#{panelSubctgBean.lstCrcCpuSelect}" label="CPU" filter="true" filterMatchMode="startsWith"
+                                              panelStyle="width:750px" style="width: 150px" converter="crcConverterCpu">
+                            <f:selectItems value="#{panelSubctgBean.lstCrcCpu}" var="crcSubCpu" itemLabel="#{crcSubCpu.crcDescripcion}" itemValue="#{crcSubCpu}"/>
+                        </p:selectCheckboxMenu>
+                        <p:selectCheckboxMenu id="gpu" value="#{panelSubctgBean.lstCrcGpuSelect}" label="GPU" filter="true" filterMatchMode="startsWith"
+                                              panelStyle="width:750px" style="width: 150px" converter="crcConverterGpu">
+                            <f:selectItems value="#{panelSubctgBean.lstCrcGpu}" var="crcSubGpu" itemLabel="#{crcSubGpu.crcDescripcion}" itemValue="#{crcSubGpu}"/>
+                        </p:selectCheckboxMenu>
+                        <p:selectCheckboxMenu id="card" value="#{panelSubctgBean.lstCrcCardslotSelect}" label="Card Slot" filter="true" filterMatchMode="startsWith"
+                                              panelStyle="width:750px" style="width: 150px" converter="crcConverterCardslot">
+                            <f:selectItems value="#{panelSubctgBean.lstCrcCardslot}" var="crcSubCrd" itemLabel="#{crcSubCrd.crcDescripcion}" itemValue="#{crcSubCrd}"/>
+                        </p:selectCheckboxMenu>
+                        <p:selectCheckboxMenu id="internal" value="#{panelSubctgBean.lstCrcInternalSelect}" label="Internal" filter="true" filterMatchMode="startsWith"
+                                              panelStyle="width:750px" style="width: 150px" converter="crcConverterInternal">
+                            <f:selectItems value="#{panelSubctgBean.lstCrcInternal}" var="crcSubInt" itemLabel="#{crcSubInt.crcDescripcion}" itemValue="#{crcSubInt}"/>
+                        </p:selectCheckboxMenu>
+                        <p:selectCheckboxMenu id="primary" value="#{panelSubctgBean.lstCrcPrimarySelect}" label="Primary" filter="true" filterMatchMode="startsWith"
+                                              panelStyle="width:750px" style="width: 150px" converter="crcConverterPrimary">
+                            <f:selectItems value="#{panelSubctgBean.lstCrcPrimary}" var="crcSubPry" itemLabel="#{crcSubPry.crcDescripcion}" itemValue="#{crcSubPry}"/>
+                        </p:selectCheckboxMenu>
+                        <p:selectCheckboxMenu id="features" value="#{panelSubctgBean.lstCrcFeaturesSelect}" label="Features" filter="true" filterMatchMode="startsWith"
+                                              panelStyle="width:750px" style="width: 150px" converter="crcConverterFeatures">
+                            <f:selectItems value="#{panelSubctgBean.lstCrcFeatures}" var="crcSubFea" itemLabel="#{crcSubFea.crcDescripcion}" itemValue="#{crcSubFea}"/>
+                        </p:selectCheckboxMenu>
+                        <p:selectCheckboxMenu id="video" value="#{panelSubctgBean.lstCrcVideoSelect}" label="Video" filter="true" filterMatchMode="startsWith"
+                                              panelStyle="width:750px" style="width: 150px" converter="crcConverterVideo">
+                            <f:selectItems value="#{panelSubctgBean.lstCrcVideo}" var="crcSubVid" itemLabel="#{crcSubVid.crcDescripcion}" itemValue="#{crcSubVid}"/>
+                        </p:selectCheckboxMenu>
+                        <p:selectCheckboxMenu id="secondary" value="#{panelSubctgBean.lstCrcSecondarySelect}" label="Secondary" filter="true" filterMatchMode="startsWith"
+                                              panelStyle="width:750px" style="width: 150px" converter="crcConverterSecondary">
+                            <f:selectItems value="#{panelSubctgBean.lstCrcSecondary}" var="crcSubSec" itemLabel="#{crcSubSec.crcDescripcion}" itemValue="#{crcSubSec}"/>
+                        </p:selectCheckboxMenu>
+                        <p:selectCheckboxMenu id="alerts" value="#{panelSubctgBean.lstCrcAlertsSelect}" label="Alerts" filter="true" filterMatchMode="startsWith"
+                                              panelStyle="width:750px" style="width: 150px" converter="crcConverterAlert">
+                            <f:selectItems value="#{panelSubctgBean.lstCrcAlerts}" var="crcSubAle" itemLabel="#{crcSubAle.crcDescripcion}" itemValue="#{crcSubAle}"/>
+                        </p:selectCheckboxMenu>
+                        <p:selectCheckboxMenu id="loud" value="#{panelSubctgBean.lstCrcLoudspeakerSelect}" label="Loudspeaker" filter="true" filterMatchMode="startsWith"
+                                              panelStyle="width:750px" style="width: 150px" converter="crcConverterLoudspeaker">
+                            <f:selectItems value="#{panelSubctgBean.lstCrcLoudspeaker}" var="crcSubLod" itemLabel="#{crcSubLod.crcDescripcion}" itemValue="#{crcSubLod}"/>
+                        </p:selectCheckboxMenu>
+                        <p:selectCheckboxMenu id="jack" value="#{panelSubctgBean.lstCrcJackSelect}" label="Jack" filter="true" filterMatchMode="startsWith"
+                                              panelStyle="width:750px" style="width: 150px" converter="crcConverterJack">
+                            <f:selectItems value="#{panelSubctgBean.lstCrcJack}" var="crcSubJak" itemLabel="#{crcSubJak.crcDescripcion}" itemValue="#{crcSubJak}"/>
+                        </p:selectCheckboxMenu>
+                        <p:selectCheckboxMenu id="wlan" value="#{panelSubctgBean.lstCrcWlanSelect}" label="WLAN" filter="true" filterMatchMode="startsWith"
+                                              panelStyle="width:750px" style="width: 150px" converter="crcConverterWlan">
+                            <f:selectItems value="#{panelSubctgBean.lstCrcWlan}" var="crcSubWln" itemLabel="#{crcSubWln.crcDescripcion}" itemValue="#{crcSubWln}"/>
+                        </p:selectCheckboxMenu>
+                        <p:selectCheckboxMenu id="blue" value="#{panelSubctgBean.lstCrcBlueSelect}" label="Bluetooth" filter="true" filterMatchMode="startsWith"
+                                              panelStyle="width:750px" style="width: 150px" converter="crcConverterBlue">
+                            <f:selectItems value="#{panelSubctgBean.lstCrcBlue}" var="crcSubBlu" itemLabel="#{crcSubBlu.crcDescripcion}" itemValue="#{crcSubBlu}"/>
+                        </p:selectCheckboxMenu>
+                        <p:selectCheckboxMenu id="gps" value="#{panelSubctgBean.lstCrcGpsSelect}" label="GPS" filter="true" filterMatchMode="startsWith"
+                                              panelStyle="width:750px" style="width: 150px" converter="crcConverterGps">
+                            <f:selectItems value="#{panelSubctgBean.lstCrcGps}" var="crcSubGps" itemLabel="#{crcSubGps.crcDescripcion}" itemValue="#{crcSubGps}"/>
+                        </p:selectCheckboxMenu>
+                        <p:selectCheckboxMenu id="radio" value="#{panelSubctgBean.lstCrcRadioSelect}" label="Radio" filter="true" filterMatchMode="startsWith"
+                                              panelStyle="width:750px" style="width: 150px" converter="crcConverterRadio">
+                            <f:selectItems value="#{panelSubctgBean.lstCrcRadio}" var="crcSubRad" itemLabel="#{crcSubRad.crcDescripcion}" itemValue="#{crcSubRad}"/>
+                        </p:selectCheckboxMenu>
+                        <p:selectCheckboxMenu id="usb" value="#{panelSubctgBean.lstCrcUsbSelect}" label="USB" filter="true" filterMatchMode="startsWith"
+                                              panelStyle="width:750px" style="width: 150px" converter="crcConverterUsb">
+                            <f:selectItems value="#{panelSubctgBean.lstCrcUsb}" var="crcSubUsb" itemLabel="#{crcSubUsb.crcDescripcion}" itemValue="#{crcSubUsb}"/>
+                        </p:selectCheckboxMenu>
+                        <p:selectCheckboxMenu id="other" value="#{panelSubctgBean.lstCrcOtherSelect}" label="Other" filter="true" filterMatchMode="startsWith"
+                                              panelStyle="width:750px" style="width: 150px" converter="crcConverterOther">
+                            <f:selectItems value="#{panelSubctgBean.lstCrcOther}" var="crcSubOth" itemLabel="#{crcSubOth.crcDescripcion}" itemValue="#{crcSubOth}"/>
+                        </p:selectCheckboxMenu>
+                        <p:selectCheckboxMenu id="talk" value="#{panelSubctgBean.lstCrcTalktimeSelect}" label="Talk Time" filter="true" filterMatchMode="startsWith"
+                                              panelStyle="width:750px" style="width: 150px" converter="crcConverterTalk">
+                            <f:selectItems value="#{panelSubctgBean.lstCrcTalktime}" var="crcSubTlk" itemLabel="#{crcSubTlk.crcDescripcion}" itemValue="#{crcSubTlk}"/>
+                        </p:selectCheckboxMenu>
+                        <p:selectCheckboxMenu id="music" value="#{panelSubctgBean.lstCrcMusicplaySelect}" label="Music Play" filter="true" filterMatchMode="startsWith"
+                                              panelStyle="width:750px" style="width: 150px" converter="crcConverterMusicplay">
+                            <f:selectItems value="#{panelSubctgBean.lstCrcMusicplay}" var="crcSubMsk" itemLabel="#{crcSubMsk.crcDescripcion}" itemValue="#{crcSubMsk}"/>
+                        </p:selectCheckboxMenu>
+                        <p:selectCheckboxMenu id="battery" value="#{panelSubctgBean.lstCrcBatteryTypeSelect}" label="Battery Type" filter="true" filterMatchMode="startsWith"
+                                              panelStyle="width:750px" style="width: 150px" converter="crcConverterBatteryType">
+                            <f:selectItems value="#{panelSubctgBean.lstCrcBatteryType}" var="crcSubBat" itemLabel="#{crcSubBat.crcDescripcion}" itemValue="#{crcSubBat}"/>
+                        </p:selectCheckboxMenu>
+                    </p:panelGrid>
+                </p:column>
+                <p:column>
+                    <p:commandLink value="Submit" update="crcSelect" action="#{panelSubctgBean.cargarCrcASolucion(solucionBean)}"/>
+                </p:column>
+            </p:row>
+
+            <p:row>
+                <p:column colspan="3">
+                    <p:outputPanel id="crcSelect">
+                        <p:dataList value="#{panelSubctgBean.lstCaracteristicas}" var="crcSlc" emptyMessage="Seleccione las caracteristicas...">
+                            - #{crcSlc.subcategoria.subDescripcion}: #{crcSlc.crcDescripcion}
+                        </p:dataList>
+                    </p:outputPanel>
+                </p:column>
+            </p:row>
+
+            <p:row>
+                <p:column>
+                    <p:outputLabel value="Dispositivo base: " for="solDspCod"/>
+                </p:column>
+                <p:column colspan="2">
+                    <p:inputText size="3" value="#{solucionBean.sol.dspBase.dspCodigo}" id="solDspCod">
+                        <p:ajax event="blur" update="solDsp"/>
+                    </p:inputText>
+                    <p:commandButton action="#{solucionBean.getDspConCrc()}" oncomplete="PF('wdgDsp').show()" icon="ui-icon-search" title="View" update=":dlgDsp"/>
+                    <p:inputText size="30" value="#{solucionBean.sol.dspBase.dspDescripcion}" id="solDsp" disabled="true"/>
+                </p:column>
+            </p:row>
+
+            <p:row>
+                <p:column>
+                    <p:outputLabel value="No. registros" for="noReg"/>
+                </p:column>
+                <p:column colspan="2">
+                    <p:inputText size="3" id="noReg" value="#{solucionBean.noReg}"/>
+                </p:column>
+            </p:row>
+
+            <p:row>
+                <p:column><p:outputLabel value="Ordenar:" for="order"/></p:column>
+                <p:column colspan="2">
+                    <p:selectOneMenu id="order" value="#{solucionBean.order}" style="width:200px">
+                        <f:selectItem itemLabel="Seleccione" itemValue="" />
+                        <f:selectItem itemLabel="Ascendente" itemValue="asc" />
+                        <f:selectItem itemLabel="Descendente" itemValue="dsc" />
+                    </p:selectOneMenu>
+                </p:column>
+            </p:row>
+        </p:panelGrid>
+
+        <p:commandButton value="Calcular" action="#{solucionBean.procesar()}" update="ringResults"/>
+        <p:commandButton value="Menu Principal" action="index"/>
+
+        <!--Ring-->
+        <p:ring id="ringResults" value="#{solucionBean.sol.cffPerResSet}" var="dspRes" styleClass="image-ring" easing="easeInOutBack">
+            <p:panelGrid style="text-align: center">
+                <f:facet name="header">
+                    <p:row>
+                        <p:column><p:outputLabel value="#{dspRes.dspRs.dspDescripcion}"/></p:column>
+                    </p:row>
+                </f:facet>
+                <p:row>
+                    <p:column><img src="resources/images/#{dspRes.dspRs.dspCodigo}.jpg" alt="" width="448" height="300"/></p:column>
+                </p:row>
+                <p:row>
+                    <p:column><p:commandButton update="dlgDspCrc" icon="ui-icon-search" title="Dispositivo" oncomplete="PF('wdgDspCrc').show();" action="#{cofPerResSetBean.dspSelected(dspRes)}"/></p:column>
+                </p:row>
+                <p:row>
+                    <p:column><p:outputLabel value="#{solucionBean.sisRecom}"/></p:column>
+                </p:row>
+                <p:row>
+                    <p:column><p:outputLabel value="#{dspRes.valRs}"/></p:column>
+                </p:row>
+            </p:panelGrid>
+        </p:ring>
+    </h:form>
+
+    <!--Dialog de busqueda de aplicacion base-->
+    <p:dialog id="dlgApp" header="Apps" widgetVar="wdgApp" modal="true" width="750">
+        <h:form>
+            <p:dataTable id="dataApp" var="app" value="#{filtradoContenidoBean.lstApp}" emptyMessage="No hay datos." scrollable="true" scrollWidth="100%" scrollHeight="500">
+                <f:facet name="header">
+                    Aplicaciones
+                </f:facet>
+                <p:column headerText="Codigo" filterBy="#{app.appCodigo}" filterMatchMode="contains" style="width: 150px;text-align: center">
+                    <p:outputLabel value="#{app.appCodigo}"/>
+                </p:column>
+                <p:column headerText="Descripcion" filterBy="#{app.appDescripcion}" filterMatchMode="contains">
+                    <p:outputLabel value="#{app.appDescripcion}"/>
+                </p:column>
+                <p:column headerText="Seleccionar" style="width: 150px;text-align: center">
+                    <p:commandButton icon="ui-icon-search" action="#{panelSubctgBean.cargaMenus(app)}" update=":form:caracteristicasMenu" oncomplete="PF('wdgApp').hide()"/>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </p:dialog>
+
+    <!--Dialog de busqueda de dispositvo base-->
+    <p:dialog id="dlgDsp" header="Dispositivos" widgetVar="wdgDsp" modal="true" width="750">
+        <h:form>
+            <p:dataTable id="dataDsp" var="dispositivo" value="#{solucionBean.lstDspConCrc}" emptyMessage="No hay datos." scrollable="true" scrollWidth="100%" scrollHeight="500">
+                <f:facet name="header">
+                    Dispositivos
+                </f:facet>
+                <p:column headerText="Codigo" filterBy="#{dispositivo.dspCodigo}" filterMatchMode="contains" style="width: 150px;text-align: center">
+                    <p:outputLabel value="#{dispositivo.dspCodigo}"/>
+                </p:column>
+                <p:column headerText="Descripcion" filterBy="#{dispositivo.dspDescripcion}" filterMatchMode="contains">
+                    <p:outputLabel value="#{dispositivo.dspDescripcion}"/>
+                </p:column>
+                <p:column headerText="Seleccionar" style="width: 150px;text-align: center">
+                    <p:commandButton icon="ui-icon-search" action="#{solucionBean.sol.setDspBase(dispositivo)}" update=":form:solDspCod" oncomplete="PF('wdgDsp').hide()"/>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </p:dialog>
+    <!--Dialog para mostrar las caracteristicas del dispositivo-->
+    <p:dialog id="dlgDspCrc" header="Dispositivo" widgetVar="wdgDspCrc" modal="true" width="800">
+        <h:form>
+            <p:panelGrid style="margin-top:10px">
+                <f:facet name="header">
+                    <p:row>
+                        <p:column colspan="4">Especificaciones</p:column>
+                    </p:row>
+                </f:facet>
+                <p:row>
+                    <p:column>Dispositivo</p:column>
+                    <p:column>#{cofPerResSetBean.dspRs.dspDescripcion}</p:column>
+                    <p:column colspan="2" rowspan="6">
+                        <img src="resources/images/#{cofPerResSetBean.dspRs.dspCodigo}.jpg" alt="" width="275px" height="300px"/>
+                    </p:column>
+                </p:row>
+                <p:row>
+                    <p:column>Marca</p:column>
+                    <p:column>#{cofPerResSetBean.dspRs.marca.mrcNombre}</p:column>
+                </p:row>
+                <p:row>
+                    <p:column>Modelo</p:column>
+                    <p:column>#{cofPerResSetBean.dspRs.modelo.mdlNombre}</p:column>
+                </p:row>
+                <p:row>
+                    <p:column>Valoracion</p:column>
+                    <p:column>#{cofPerResSetBean.valRs}</p:column>
+                </p:row>
+                <p:row>
+                    <p:column>No. Usuarios</p:column>
+                    <p:column></p:column>
+                </p:row>
+                <p:row>
+                    <p:column>No. Aplicaciones</p:column>
+                    <p:column></p:column>
+                </p:row>
+            </p:panelGrid>
+            <p:dataTable id="dspCrcs" value="#{cofPerResSetBean.dspRs.crcs}" var="crcs">
+                <p:column headerText="Caracteristica">
+                    <p:outputLabel value="#{crcs.crcDescripcion}"/>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </p:dialog>
+</h:body>
+</html>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<persistence
+xmlns:xsl="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:xsi="jar://C:/Program Files (x86)/JetBrains/IntelliJ IDEA 2016.1.3/plugins/JavaEE/lib/javaee-impl.jar!/standardSchemas/persistence.xsd"
+version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
+
+<persistence-unit name="Persistencia">
+
+    <!-- REPRESENTAMOS LAS CLASES -->
+    <class>es.rostan.hibernate.entidades.app</class>
+    <class>es.rostan.hibernate.entidades.caracteristica</class>
+    <class>es.rostan.hibernate.entidades.dispositivo</class>
+    <class>es.rostan.hibernate.entidades.dispositivoApp</class>
+    <class>es.rostan.hibernate.entidades.dispositivoCrc</class>
+    <class>es.rostan.hibernate.entidades.dspAppPk</class>
+    <class>es.rostan.hibernate.entidades.usuario</class>
+    <class>es.rostan.hibernate.entidades.usrDspAppPK</class>
+    <class>es.rostan.hibernate.entidades.usrDspAppValoracion</class>
+    <class>es.rostan.hibernate.entidades.marca</class>
+    <class>es.rostan.hibernate.entidades.modelo</class>
+    <class>es.rostan.hibernate.entidades.categoria</class>
+    <class>es.rostan.hibernate.entidades.subcategoria</class>
+    <class>es.rostan.hibernate.entidades.matrizReferencial</class>
+    <class>es.rostan.hibernate.entidades.matrizReferencialPK</class>
+    <class>es.rostan.hibernate.entidades.matrizBooleana</class>
+    <class>es.rostan.hibernate.entidades.matrizBooleanaPK</class>
+
+
+    <properties>
+        <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+        <property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/dbBaseConocimiento" />
+        <property name="javax.persistence.jdbc.user" value="root" />
+        <property name="javax.persistence.jdbc.password" value="123" />
+
+        <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
+        <property name="hibernate.show_sql" value="false" />
+
+
+        <!--validate: validate the schema, makes no changes to the database.-->
+        <!--update: update the schema.-->
+        <!--create: creates the schema, destroying previous data.-->
+        <!--create-drop: drop the schema at the end of the session.-->
+
+        <property name="hibernate.hbm2ddl.auto" value="update"/>
+    </properties>
+</persistence-unit>
+</persistence>

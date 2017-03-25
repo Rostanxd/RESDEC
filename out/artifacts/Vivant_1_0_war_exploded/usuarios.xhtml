@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Vivant 1.0 - Dispositivo</title>
+</h:head>
+<h:body>
+    <h:form id="form">
+        <p:growl id="msj" autoUpdate="true"/>
+        <f:event type="preRenderView" listener="#{usrBean.searchLstUsr()}"/>
+
+        <!--Botones-->
+        <p:commandButton value="Ingresar" id="ingresar"/>
+        <p:commandButton value="Menu Principal" id="index" action="index"/>
+
+        <!--DataTable de los Usuarios-->
+        <p:dataTable id="data" var="usr" value="#{usrBean.lstUsr}" emptyMessage="No hay datos." scrollable="true" scrollWidth="100%" scrollHeight="500">
+            <f:facet name="header">
+                Usuarios
+            </f:facet>
+            <p:column headerText="Id" filterBy="#{usr.usrCodigo}" filterMatchMode="contains">
+                <p:outputLabel value="#{usr.usrCodigo}"/>
+            </p:column>
+            <p:column headerText="Edad" filterBy="#{usr.usrEdad}" filterMatchMode="contains">
+                <p:outputLabel value="#{usr.usrEdad}"/>
+            </p:column>
+            <p:column headerText="Genero" filterBy="#{usr.usrGenero}" filterMatchMode="contains">
+                <p:outputLabel value="#{usr.usrGenero.toString()}">
+                    <f:converter converterId="sexoconverter"/>
+                </p:outputLabel>
+            </p:column>
+            <p:column headerText="Ocupacion" filterBy="#{usr.usrOcupacion}" filterMatchMode="contains">
+                <p:outputLabel value="#{usr.usrOcupacion}"/>
+            </p:column>
+            <p:column headerText="Estudios" filterBy="#{usr.usrEstudios}" filterMatchMode="contains">
+                <p:outputLabel value="#{usr.usrEstudios}"/>
+            </p:column>
+            <p:column headerText="Intereses" filterBy="#{usr.usrIntereses}" filterMatchMode="contains">
+                <p:outputLabel value="#{usr.usrIntereses}"/>
+            </p:column>
+            <p:column headerText="Frc. Internet" filterBy="#{usr.usrFrcInternet}" filterMatchMode="contains">
+                <p:outputLabel value="#{usr.usrFrcInternet}"/>
+            </p:column>
+            <p:column headerText="Num. Apps." filterBy="#{usr.usrNumApp}" filterMatchMode="contains">
+                <p:outputLabel value="#{usr.usrNumApp}"/>
+            </p:column>
+            <p:column headerText="Instalacion" filterBy="#{usr.usrAppInstall}" filterMatchMode="contains">
+                <p:outputLabel value="#{usr.usrAppInstall}"/>
+            </p:column>
+            <p:column headerText="Apps Promedio" filterBy="#{usr.usrAppProm}" filterMatchMode="contains">
+                <p:outputLabel value="#{usr.usrAppProm}"/>
+            </p:column>
+            <p:column headerText="Valoraciones">
+                <p:commandButton value="Ver" action="#{usrBean.searchUsr(usr)}" oncomplete="PF('wdgDatos').show()" icon="ui-icon-search" update=":dlgDatos">
+                    <f:setPropertyActionListener value="#{usr}" target="#{usrBean.usr}"/>
+                </p:commandButton>
+            </p:column>
+            <!--Pie-->
+            <f:facet name="footer">
+                Vivant - 1.0
+            </f:facet>
+        </p:dataTable>
+    </h:form>
+
+    <!--Dialog para dispositivo-->
+    <p:dialog id="dlgDatos" header="Valoraciones de Usuarios" widgetVar="wdgDatos" modal="true" width="750">
+        <h:form>
+            <f:event type="preRenderView" listener="#{usrBean.searchUsrValoraciones(usrBean.usr)}"/>
+
+            <p:panelGrid columns="2">
+                <p:outputLabel value="Usr Id" style="font-weight: bold"/>
+                <p:inputText value="#{usrBean.usr.usrCodigo}" disabled="true"/>
+            </p:panelGrid>
+            <!--Tabla de votaciones-->
+            <p:dataTable id="dataVotos" var="usrVal" value="#{usrBean.lstUsrValoracion}" emptyMessage="No hay datos.">
+                <p:column headerText="Dispositivo" filterBy="#{usrVal.dispositivo.getDspDescripcion()}" filterMatchMode="contains">
+                    <p:outputLabel value="#{usrVal.dispositivo.getDspDescripcion()}"/>
+                </p:column>
+                <p:column headerText="Aplicacion" filterBy="#{usrVal.app.getAppDescripcion()}" filterMatchMode="contains">
+                    <p:outputLabel value="#{usrVal.app.getAppDescripcion()}"/>
+                </p:column>
+                <p:column headerText="Valoracion" filterBy="#{usrVal.usrDspAppValor}" filterMatchMode="contains">
+                    <p:outputLabel value="#{usrVal.usrDspAppValor}"/>
+                </p:column>
+            </p:dataTable>
+            <!--Botones-->
+            <p:commandButton value="Cancelar" oncomplete="PF('wdgDatos').hide()" immediate="true"/>
+        </h:form>
+    </p:dialog>
+</h:body>
+</html>

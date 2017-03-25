@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <title>Vivant 1.0 - Dispositivo</title>
+</h:head>
+<h:body>
+    <h:form id="form">
+        <p:growl id="msj" autoUpdate="true"/>
+
+        <!--DataTable de los dispositivos-->
+        <p:dataTable id="data" var="dispositivo" value="#{dispositivoBean.lstDsp}" emptyMessage="No hay datos." scrollable="true" scrollWidth="100%" scrollHeight="500px">
+            <f:facet name="header">
+                Dispositivos
+            </f:facet>
+            <p:column style="width: 200px; text-align: center">
+                <img src="resources/images/#{dispositivo.dspCodigo}.jpg" alt="" width="100px" height="133px"/>
+            </p:column>
+            <p:column headerText="Código" filterBy="#{dispositivo.dspCodigo}" filterMatchMode="contains">
+                <p:outputLabel value="#{dispositivo.dspCodigo}"/>
+            </p:column>
+            <p:column headerText="Estado">
+                <p:outputLabel value="#{dispositivo.dspEstado}">
+                    <f:converter converterId="estadoConverter"/>
+                </p:outputLabel>
+            </p:column>
+            <p:column headerText="Marca" filterBy="#{dispositivo.marca.mrcNombre}" filterMatchMode="contains">
+                <p:outputLabel value="#{dispositivo.marca.mrcNombre}"/>
+            </p:column>
+            <p:column headerText="Modelo" filterBy="#{dispositivo.modelo.mdlNombre}" filterMatchMode="contains">
+                <p:outputLabel value="#{dispositivo.modelo.mdlNombre}"/>
+            </p:column>
+            <p:column style="width: 50px;text-align: center">
+                <p:commandButton action="#{dispositivoBean.searchDsp(dispositivo)}" oncomplete="PF('wdgDatos').show()" icon="ui-icon-search" title="View" update=":dlgDatos" >
+                    <f:setPropertyActionListener value="#{dispositivo}" target="#{dispositivoBean.dispositivo}"/>
+                </p:commandButton>
+            </p:column>
+        </p:dataTable>
+
+        <!--Botones-->
+        <p:commandButton value="Ingresar" id="ingresar" oncomplete="PF('wdgDatos').show();" actionListener="#{DispositivoBean.setBtnAccion('Ingresar')}" update=":dlgDatos"/>
+        <p:commandButton value="Menu Principal" id="index" action="index"/>
+    </h:form>
+
+    <!--Dialog para dispositivo-->
+    <p:dialog id="dlgDatos" header="Datos" widgetVar="wdgDatos" modal="true">
+        <h:form>
+            <p:panelGrid columns="2">
+                <p:outputLabel value="Código" style="font-weight: bold"/>
+                <p:inputText value="#{dispositivoBean.dispositivo.dspCodigo}" disabled="true"/>
+                <p:outputLabel value="Descripción" style="font-weight: bold"/>
+                <p:inputText value="#{dispositivoBean.dispositivo.dspDescripcion}"/>
+                <p:outputLabel value="Estado" style="font-weight: bold"/>
+                <p:selectOneMenu value="#{dispositivoBean.dispositivo.dspEstado}" style="width: 125px">
+                    <f:selectItem itemLabel="Select One" itemValue=""/>
+                    <f:selectItem itemLabel="Activo" itemValue="A"/>
+                    <f:selectItem itemLabel="Inactivo" itemValue="I"/>
+                </p:selectOneMenu>
+            </p:panelGrid>
+            <!--DataList de los caracteristicas-->
+            <p:dataList value="#{dispositivoBean.dispositivo.crcs}" var="caracteristica" type="Caracteristica">
+                <f:facet name="header">
+                    Características
+                </f:facet>
+                - #{caracteristica.subcategoria.subDescripcion}: #{caracteristica.crcDescripcion}
+            </p:dataList>
+            <!--Botones-->
+            <p:commandButton value="#{dispositivoBean.btnAccion}" action="#{dispositivoBean.operar()}" oncomplete="PF('wdgDatos').hide()" update="form:data"/>
+            <p:commandButton value="Eliminar" action="#{dispositivoBean.deleteDsp()}" oncomplete="PF('wdgDatos').hide()" update="form:data"/>
+            <p:commandButton value="Cancelar" oncomplete="PF('wdgDatos').hide()" immediate="true"/>
+        </h:form>
+    </p:dialog>
+</h:body>
+</html>

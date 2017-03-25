@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - dbbaseconocimiento@localhost" uuid="2ad0380f-9e3b-44b7-a24a-47f0d35d7865">
+    <database-info product="MySQL" version="5.5.24-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <database-model serializer="dbm" rdbms="MYSQL" format-version="2.5">
+      <schema id="1" name="dbbaseconocimiento"/>
+      <table id="2" parent="1" name="app"/>
+      <table id="3" parent="1" name="caracteristica"/>
+      <table id="4" parent="1" name="dispositivo"/>
+      <table id="5" parent="1" name="dispositivocrc"/>
+      <table id="6" parent="1" name="usuario"/>
+      <table id="7" parent="1" name="usrdspappvaloracion"/>
+      <table id="8" parent="1" name="modelo"/>
+      <table id="9" parent="1" name="marca"/>
+      <table id="10" parent="1" name="matrizdspapp"/>
+      <table id="11" parent="1" name="hibernate_sequence"/>
+      <table id="12" parent="1" name="categoria"/>
+      <table id="13" parent="1" name="subcategoria"/>
+      <column id="14" parent="2" name="appCodigo">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="15" parent="2" name="appDescripcion">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <key id="16" parent="2" name="PRIMARY">
+        <columns>appCodigo</columns>
+        <primary>1</primary>
+      </key>
+      <column id="17" parent="3" name="crcCodigo">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="18" parent="3" name="crcDescripcion">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="19" parent="3" name="subCodigo">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <index id="20" parent="3" name="FKco8knyexijttyjt0qb9f925l3">
+        <columns>subCodigo</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="21" parent="3" name="PRIMARY">
+        <columns>crcCodigo</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="22" parent="3" name="FKco8knyexijttyjt0qb9f925l3">
+        <columns>subCodigo</columns>
+        <ref-key>~.subcategoria.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="23" parent="4" name="dspCodigo">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="24" parent="4" name="dspDescripcion">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="25" parent="4" name="dspEstado">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="26" parent="4" name="mrcCodigo">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="27" parent="4" name="mdlCodigo">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <index id="28" parent="4" name="FK1yk9dvndexy5ttod0wdsom4mn">
+        <columns>mrcCodigo</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="29" parent="4" name="FKhjq7ubobdsvfj548nsdqoj95v">
+        <columns>mdlCodigo</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="30" parent="4" name="PRIMARY">
+        <columns>dspCodigo</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="31" parent="4" name="FK1yk9dvndexy5ttod0wdsom4mn">
+        <columns>mrcCodigo</columns>
+        <ref-key>~.marca.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="32" parent="4" name="FKhjq7ubobdsvfj548nsdqoj95v">
+        <columns>mdlCodigo</columns>
+        <ref-key>~.modelo.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="33" parent="5" name="dspCodigo">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="34" parent="5" name="crcCodigo">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="35" parent="5" name="dspCrcDescripcion">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <index id="36" parent="5" name="FKodlkg6goaffyu4u4rs4r00sy5">
+        <columns>crcCodigo</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="37" parent="5" name="PRIMARY">
+        <columns>dspCodigo
+crcCodigo</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="38" parent="5" name="FKjolfsyxjunfuf6e7xjny8rd9i">
+        <columns>dspCodigo</columns>
+        <ref-key>~.dispositivo.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="39" parent="5" name="FKodlkg6goaffyu4u4rs4r00sy5">
+        <columns>crcCodigo</columns>
+        <ref-key>~.caracteristica.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="40" parent="5" name="FKoke536girvxedpqh62eave10v">
+        <columns>crcCodigo</columns>
+        <ref-key>~.caracteristica.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="41" parent="5" name="FKs41tx4rks84bj2em814vsy55n">
+        <columns>dspCodigo</columns>
+        <ref-key>~.dispositivo.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="42" parent="6" name="usrCodigo">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="43" parent="6" name="usrAppInstall">
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="44" parent="6" name="usrAppProm">
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="45" parent="6" name="usrEdad">
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="46" parent="6" name="usrEstudios">
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="47" parent="6" name="usrFrcInternet">
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="48" parent="6" name="usrGenero">
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="49" parent="6" name="usrIntereses">
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="50" parent="6" name="usrNumApp">
+        <data-type>int(11)</data-type>
+      </column>
+      <column id="51" parent="6" name="usrOcupacion">
+        <data-type>int(11)</data-type>
+      </column>
+      <key id="52" parent="6" name="PRIMARY">
+        <columns>usrCodigo</columns>
+        <primary>1</primary>
+      </key>
+      <column id="53" parent="7" name="usrCodigo">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="54" parent="7" name="dspCodigo">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="55" parent="7" name="appCodigo">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="56" parent="7" name="usrDspValor">
+        <data-type>int(11)</data-type>
+      </column>
+      <index id="57" parent="7" name="FKctj5xnej0yiqhgr9smkfcl3ci">
+        <columns>appCodigo</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <index id="58" parent="7" name="FKthrr9fu6oii7pm73lsn348c40">
+        <columns>dspCodigo</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="59" parent="7" name="PRIMARY">
+        <columns>usrCodigo
+dspCodigo
+appCodigo</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="60" parent="7" name="FKctj5xnej0yiqhgr9smkfcl3ci">
+        <columns>appCodigo</columns>
+        <ref-key>~.app.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="61" parent="7" name="FKripsp5vyxmb18vkb8e5gigyi3">
+        <columns>usrCodigo</columns>
+        <ref-key>~.usuario.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="62" parent="7" name="FKthrr9fu6oii7pm73lsn348c40">
+        <columns>dspCodigo</columns>
+        <ref-key>~.dispositivo.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="63" parent="8" name="mdlCodigo">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="64" parent="8" name="mdlEstado">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="65" parent="8" name="mdlNombre">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <key id="66" parent="8" name="PRIMARY">
+        <columns>mdlCodigo</columns>
+        <primary>1</primary>
+      </key>
+      <column id="67" parent="9" name="mrcCodigo">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="68" parent="9" name="mrcEstado">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="69" parent="9" name="mrcNombre">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <key id="70" parent="9" name="PRIMARY">
+        <columns>mrcCodigo</columns>
+        <primary>1</primary>
+      </key>
+      <column id="71" parent="10" name="appCodigo">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="72" parent="10" name="dspCodigo">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="73" parent="10" name="calificacion">
+        <data-type>double</data-type>
+      </column>
+      <index id="74" parent="10" name="FKs0uf0oux19nqgej5ba6vad8e0">
+        <columns>dspCodigo</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="75" parent="10" name="PRIMARY">
+        <columns>appCodigo
+dspCodigo</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="76" parent="10" name="FKgptqrli1wmqhpn40sigik0gd1">
+        <columns>appCodigo</columns>
+        <ref-key>~.app.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <foreign-key id="77" parent="10" name="FKs0uf0oux19nqgej5ba6vad8e0">
+        <columns>dspCodigo</columns>
+        <ref-key>~.dispositivo.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+      <column id="78" parent="11" name="next_val">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="79" parent="12" name="ctgCodigo">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="80" parent="12" name="ctgDescripcion">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <key id="81" parent="12" name="PRIMARY">
+        <columns>ctgCodigo</columns>
+        <primary>1</primary>
+      </key>
+      <column id="82" parent="13" name="subCodigo">
+        <mandatory>1</mandatory>
+        <data-type>bigint(20)</data-type>
+      </column>
+      <column id="83" parent="13" name="subDescripcion">
+        <data-type>varchar(255)</data-type>
+      </column>
+      <column id="84" parent="13" name="ctgCodigo">
+        <data-type>bigint(20)</data-type>
+      </column>
+      <index id="85" parent="13" name="FKnsc3dq3pna02vac9x4yqr9882">
+        <columns>ctgCodigo</columns>
+        <desc-columns></desc-columns>
+      </index>
+      <key id="86" parent="13" name="PRIMARY">
+        <columns>subCodigo</columns>
+        <primary>1</primary>
+      </key>
+      <foreign-key id="87" parent="13" name="FKnsc3dq3pna02vac9x4yqr9882">
+        <columns>ctgCodigo</columns>
+        <ref-key>~.categoria.PRIMARY</ref-key>
+        <cascade-update-rule>restrict</cascade-update-rule>
+        <cascade-delete-rule>restrict</cascade-delete-rule>
+      </foreign-key>
+    </database-model>
+  </data-source>
+</component>

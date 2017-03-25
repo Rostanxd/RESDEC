@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>
+        Vivant 1.0
+    </title>
+</h:head>
+<h:body>
+    <h:form id="form">
+        <p:growl id="msj" autoUpdate="true"/>
+        <p:panelGrid style="margin-top:10px">
+            <f:facet name="header">
+                <p:row>
+                    <p:column colspan="3">Top Popularity</p:column>
+                </p:row>
+            </f:facet>
+
+            <p:row>
+                <p:column><p:outputLabel value="No. registros" for="noReg"/></p:column>
+                <p:column colspan="2"><p:inputText size="3" id="noReg" value="#{topPopularityBean.noResultados}"/></p:column>
+            </p:row>
+
+            <p:row>
+                <p:column><p:outputLabel value="Ordenar:" for="order"/></p:column>
+                <p:column colspan="2">
+                    <p:selectOneMenu id="order" value="#{topPopularityBean.ordenResultados}" style="width:200px">
+                        <f:selectItem itemLabel="Seleccione" itemValue="" />
+                        <f:selectItem itemLabel="Ascendente" itemValue="asc" />
+                        <f:selectItem itemLabel="Descendente" itemValue="dsc" />
+                    </p:selectOneMenu>
+                </p:column>
+            </p:row>
+        </p:panelGrid>
+
+        <p:commandButton value="Calcular" action="#{topPopularityBean.cargaTopPopularity()}" update=":form"/>
+        <p:commandButton value="Menu Principal" action="index"/>
+
+        <!--Ring-->
+        <p:ring id="ringResults" value="#{topPopularityBean.lstTopPopularity}" var="dspRes" styleClass="image-ring" easing="easeInOutBack">
+            <p:panelGrid style="text-align: center">
+                <f:facet name="header">
+                    <p:row>
+                        <p:column><p:outputLabel value="#{dspRes.dispositivo.dspDescripcion}"/></p:column>
+                    </p:row>
+                </f:facet>
+                <p:row>
+                    <p:column><img src="resources/images/#{dspRes.dispositivo.dspCodigo}.jpg" alt="" width="200" height="265"/></p:column>
+                </p:row>
+                <p:row>
+                    <p:column><p:outputLabel value="#{dspRes.valor}"/></p:column>
+                </p:row>
+            </p:panelGrid>
+        </p:ring>
+
+    </h:form>
+</h:body>
+</html>

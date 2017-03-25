@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>
+        Vivant 1.0
+    </title>
+</h:head>
+<h:body>
+    <h:form id="form">
+        <p:growl id="msj" autoUpdate="true"/>
+        <!--<f:event type="preRenderView" listener="#{CaracteristicaBean.searchLstCrc()}"/>-->
+
+        <p:panelGrid style="margin-top:10px">
+            <f:facet name="header">
+                <p:row>
+                    <p:column colspan="3">Transición de una Configuración a Otra - Contenido</p:column>
+                </p:row>
+            </f:facet>
+
+            <p:row>
+                <p:column>
+                    <p:outputLabel value="Aplicacion base: " for="appCod"/>
+                </p:column>
+                <p:column colspan="2">
+                    <p:inputText size="3" value="#{filtradoContenidoBean.appSelected.appCodigo}" id="appCod">
+                        <p:ajax event="blur" update="appDescripcion"/>
+                    </p:inputText>
+                    <p:commandButton oncomplete="PF('wdgApp').show()" icon="ui-icon-search" title="View" update=":dlgApp"/>
+                    <p:inputText size="30" value="#{filtradoContenidoBean.appSelected.appDescripcion}" id="appDescripcion" disabled="true"/>
+                </p:column>
+            </p:row>
+
+            <p:row>
+                <p:column>
+                    <p:outputLabel value="Caracteristicas: "/>
+                </p:column>
+                <p:column>
+                    <p:selectCheckboxMenu id="lstCaracteristicas" value="#{filtradoContenidoBean.lstCaracteristicasSelected}"
+                                          label="Seleccionar..." filter="true" filterMatchMode="startsWith" panelStyle="width:750px" style="width: 150px" converter="filtradoContenidoCrcConverter">
+                        <f:selectItems value="#{filtradoContenidoBean.lstCaracteristicas}" var="crc"
+                                       itemLabel="#{crc.crcDescripcion}" itemValue="#{crc}"/>
+                    </p:selectCheckboxMenu>
+                </p:column>
+                <p:column>
+                    <p:commandLink value="Listo" update="crcSelect"/>
+                </p:column>
+            </p:row>
+
+            <p:row>
+                <p:column colspan="3">
+                    <p:outputPanel id="crcSelect">
+                        <p:dataList value="#{filtradoContenidoBean.lstCaracteristicasSelected}" var="crcSlc" emptyMessage="Seleccione las caracteristicas...">
+                            - #{crcSlc.subcategoria.subDescripcion}: #{crcSlc.crcDescripcion}
+                        </p:dataList>
+                    </p:outputPanel>
+                </p:column>
+            </p:row>
+
+            <p:row>
+                <p:column>
+                    <p:outputLabel value="No. registros" for="noReg"/>
+                </p:column>
+                <p:column colspan="2">
+                    <p:inputText size="3" id="noReg" value="#{filtradoContenidoBean.noResultados}"/>
+                </p:column>
+            </p:row>
+
+            <p:row>
+                <p:column><p:outputLabel value="Ordenar:" for="order"/></p:column>
+                <p:column colspan="2">
+                    <p:selectOneMenu id="order" value="#{filtradoContenidoBean.ordenResultados}" style="width:200px">
+                        <f:selectItem itemLabel="Seleccione" itemValue="" />
+                        <f:selectItem itemLabel="Ascendente" itemValue="asc" />
+                        <f:selectItem itemLabel="Descendente" itemValue="dsc" />
+                    </p:selectOneMenu>
+                </p:column>
+            </p:row>
+        </p:panelGrid>
+
+        <p:commandButton value="Calcular" action="#{filtradoContenidoBean.calcularContenido()}" update=":ringResults"/>
+        <p:commandButton value="Menu Principal" action="index"/>
+    </h:form>
+
+    <!--Ring-->
+    <p:ring id="ringResults" value="#{filtradoContenidoBean.lstMatrizContenidoResultado}" var="dspRes" styleClass="image-ring" easing="easeInOutBack">
+        <p:panelGrid style="text-align: center">
+            <f:facet name="header">
+                <p:row>
+                    <p:column><p:outputLabel value="#{dspRes.dispositivo.dspDescripcion}"/></p:column>
+                </p:row>
+            </f:facet>
+            <p:row>
+                <p:column><img src="resources/images/#{dspRes.dispositivo.dspCodigo}.jpg" alt="" width="200px" height="265px"/></p:column>
+            </p:row>
+            <p:row>
+                <p:column><p:outputLabel value="Resultado Referencial"/></p:column>
+            </p:row>
+            <p:row>
+                <p:column><p:outputLabel value="#{dspRes.valor}"/></p:column>
+            </p:row>
+        </p:panelGrid>
+    </p:ring>
+
+    <!--Dialog de busqueda de aplicacion base-->
+    <p:dialog id="dlgApp" header="Apps" widgetVar="wdgApp" modal="true" width="750">
+        <h:form>
+            <p:dataTable id="dataApp" var="app" value="#{filtradoContenidoBean.lstApp}" emptyMessage="No hay datos." scrollable="true" scrollWidth="100%" scrollHeight="500">
+                <f:facet name="header">
+                    Aplicaciones
+                </f:facet>
+                <p:column headerText="Codigo" filterBy="#{app.appCodigo}" filterMatchMode="contains" style="width: 150px;text-align: center">
+                    <p:outputLabel value="#{app.appCodigo}"/>
+                </p:column>
+                <p:column headerText="Descripcion" filterBy="#{app.appDescripcion}" filterMatchMode="contains">
+                    <p:outputLabel value="#{app.appDescripcion}"/>
+                </p:column>
+                <p:column headerText="Seleccionar" style="width: 150px;text-align: center">
+                    <p:commandButton icon="ui-icon-search" action="#{filtradoContenidoBean.cargarLstCaracteristicas(app)}" update=":form" oncomplete="PF('wdgApp').hide()"/>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </p:dialog>
+</h:body>
+</html>

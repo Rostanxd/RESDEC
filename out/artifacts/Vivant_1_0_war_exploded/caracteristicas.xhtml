@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Caracteristicas</title>
+</h:head>
+<h:body>
+    <h:form id="form">
+        <p:growl id="msj" autoUpdate="true"/>
+        <f:event type="preRenderView" listener="#{CaracteristicaBean.searchLstCrc()}"/>
+
+        <!--Botones-->
+        <p:commandButton value="Ingresar" id="ingresar" oncomplete="PF('wdgDatos').show();" action="#{CaracteristicaBean.setBtnAccion('Ingresar')}" update=":dlgDatos"/>
+        <p:commandButton value="Menu Principal" id="index" action="index"/>
+
+        <!--DataTable de las caracteristicas-->
+        <p:dataTable id="data" var="crc" value="#{CaracteristicaBean.lstCrc}" emptyMessage="No hay datos." scrollable="true" scrollWidth="100%" scrollHeight="500">
+            <f:facet name="header">
+                Caracteristicas
+            </f:facet>
+            <p:column headerText="Codigo" filterBy="#{crc.crcCodigo}" filterMatchMode="contains">
+                <p:outputLabel value="#{crc.crcCodigo}"/>
+            </p:column>
+            <p:column headerText="Descripcion" filterBy="#{crc.crcDescripcion}" filterMatchMode="contains">
+                <p:outputLabel value="#{crc.crcDescripcion}"/>
+            </p:column>
+            <p:column style="width: 50px;text-align: center">
+                <p:commandButton action="#{CaracteristicaBean.searchCrc(crc)}" oncomplete="PF('wdgDatos').show()" icon="ui-icon-search" title="View" update=":dlgDatos" >
+                    <f:setPropertyActionListener value="#{crc}" target="#{CaracteristicaBean.crc}"/>
+                </p:commandButton>
+            </p:column>
+        </p:dataTable>
+    </h:form>
+
+    <!--Dialog para caracteristicas-->
+    <p:dialog id="dlgDatos" header="Datos" widgetVar="wdgDatos" modal="True">
+        <h:form>
+            <p:panelGrid columns="2">
+                <p:outputLabel value="Codigo" style="font-weight: bold"/>
+                <p:inputText value="#{CaracteristicaBean.crc.crcCodigo}"/>
+                <p:outputLabel value="Descripcion" style="font-weight: bold"/>
+                <p:inputText value="#{CaracteristicaBean.crc.crcDescripcion}"/>
+            </p:panelGrid>
+            <!--Botones-->
+            <p:commandButton value="#{CaracteristicaBean.btnAccion}" action="#{CaracteristicaBean.operar()}" oncomplete="PF('wdgDatos').hide()" update="form:data"/>
+            <p:commandButton value="Eliminar" action="#{CaracteristicaBean.deletecrc()}" oncomplete="PF('wdgDatos').hide()" update="form:data"/>
+            <p:commandButton value="Cancelar" oncomplete="PF('wdgDatos').hide()" immediate="true"/>
+        </h:form>
+    </p:dialog>
+</h:body>
+</html>

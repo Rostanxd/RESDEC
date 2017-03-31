@@ -7,47 +7,79 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
 <h:head>
     <title>Aplicaciones</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </h:head>
 <h:body>
     <h:form id="form">
-        <p:growl id="msj" autoUpdate="true"/>
-        <f:event type="preRenderView" listener="#{appBean.searchLstApp()}"/>
+        <p:growl id="msj2" autoUpdate="true"/>
 
-        <!--Botones-->
-        <p:commandButton value="Ingresar" id="ingresar" oncomplete="PF('wdgDatos').show();" actionListener="#{appBean.setBtnAccion('Ingresar')}" update=":dlgDatos"/>
-        <p:commandButton value="Menu Principal" id="index" action="index"/>
+            <table align="center" id="table">
+                <tr>
+                    <td>
+                        <img src="resources/images/RESDEC-L.jpg" alt="" width="170px" height="140px"/>
+                    </td>
+                    <td>
+                        <strong></strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top">
+                        <p:menu >
+                            <p:submenu label="App"  style=" border-color: transparent; background-image: url(resources/images/fondo.jpg);color:white;font-size:10pt; text-align:center;">
+                                <p:menuitem value="Ingresar" style="font-size: smaller" oncomplete="PF('wdgDatos').show();" actionListener="#{appBean.setBtnAccion('Ingresar')}" update=":dlgDatos"/>
+                            </p:submenu>
+                            <p:submenu label="Inicio"  style=" border-color: transparent; background-image: url(resources/images/fondo.jpg);color:white;font-size:10pt; text-align:center;">
+                                <p:menuitem value="Menu Principal" style="font-size: smaller" url="index.xhtml?faces-redirect=true" />
+                            </p:submenu>
+                            <p:submenu label="Entorno de Despliegue"  style=" border-color: transparent; background-image: url(resources/images/fondo.jpg);color:white;font-size:10pt; text-align:center;">
+                                <p:menuitem value="Dispositivo" style="font-size: smaller" action="dispositivos?faces-redirect=true" />
+                                <p:menuitem value="Apps" style="font-size: smaller" action="app?faces-redirect=true" />
+                            </p:submenu>
+                            <p:submenu label="Recomendaciones" style="border-color: transparent;background-image: url(resources/images/fondo.jpg);color:white;font-size:10pt; text-align:center;">
+                                <p:menuitem value="Arranque en cero" style="font-size: smaller" action="sisTop?faces-redirect=true" />
+                                <p:menuitem value="Transición de una configuración a otra" style="font-size: smaller" action="sisVivColaborativa_new?faces-redirect=true"/>
+                                <p:menuitem value="Transición de configuraciones basados en features" style="font-size: smaller" action="sisVivContenido_new?faces-redirect=true" />
+                            </p:submenu>
+                        </p:menu>
+                    </td>
+                    <td>
 
-        <!--DataTable de las aplicaciones-->
-        <p:dataTable id="data" var="app" value="#{appBean.lstApp}" emptyMessage="No hay datos." scrollable="true" scrollWidth="100%" scrollHeight="500">
-            <f:facet name="header">
-                Aplicaciones
-            </f:facet>
-            <p:column headerText="Codigo" filterBy="#{app.appCodigo}" filterMatchMode="contains">
-                <p:outputLabel value="#{app.appCodigo}"/>
-            </p:column>
-            <p:column headerText="Descripcion" filterBy="#{app.appDescripcion}" filterMatchMode="contains">
-                <p:outputLabel value="#{app.appDescripcion}"/>
-            </p:column>
-            <p:column style="width: 50px;text-align: center">
-                <p:commandButton action="#{appBean.searchApp(app)}" oncomplete="PF('wdgDatos').show();" icon="ui-icon-search" title="View" update=":dlgDatos" >
-                    <f:setPropertyActionListener value="#{app}" target="#{appBean.app}"/>
-                </p:commandButton>
-            </p:column>
-        </p:dataTable>
+                    <f:event type="preRenderView" listener="#{appBean.searchLstApp()}"/>
+
+                    <!--DataTable de las aplicaciones-->
+                    <p:dataTable id="data" var="app" value="#{appBean.lstApp}" emptyMessage="No hay datos." scrollable="true" scrollHeight="510px" paginator="true" rows="12" style="width: 700px">
+                        <f:facet name="header">
+                            Aplicaciones
+                        </f:facet>
+                        <p:column headerText="Codigo" filterBy="#{app.appCodigo}" filterMatchMode="contains" style="width: 150px">
+                            <p:outputLabel value="#{app.appCodigo}"/>
+                        </p:column>
+                        <p:column headerText="Descripcion" filterBy="#{app.appDescripcion}" filterMatchMode="contains" style="width: 350px">
+                            <p:outputLabel value="#{app.appDescripcion}"/>
+                        </p:column>
+                        <p:column style="width: 50px;text-align: center">
+                            <p:commandButton action="#{appBean.searchApp(app)}" oncomplete="PF('wdgDatos').show();" icon="ui-icon-search" title="View" update=":dlgDatos" >
+                                <f:setPropertyActionListener value="#{app}" target="#{appBean.app}"/>
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
+                </td>
+            </tr>
+        </table>
     </h:form>
 
     <!--Dialog para aplicacion-->
     <p:dialog id="dlgDatos" header="Datos" widgetVar="wdgDatos" modal="true">
         <h:form>
             <p:panelGrid columns="2">
-                <p:outputLabel value="Codigo" style="font-weight: bold"/>
-                <p:inputText value="#{appBean.app.appCodigo}"/>
+                <p:outputLabel value="Codigo" style="font-weight: bold" />
+                <p:inputText value="#{appBean.app.appCodigo}" disabled="true"/>
                 <p:outputLabel value="Descripcion" style="font-weight: bold"/>
                 <p:inputText value="#{appBean.app.appDescripcion}"/>
             </p:panelGrid>
             <!--Botones-->
-            <p:commandButton value="#{appBean.btnAccion}" action="#{appBean.operar()}" oncomplete="PF('wdgDatos').hide()" update=":form:data"/>
-            <p:commandButton value="Eliminar" action="#{appBean.deleteApp()}" oncomplete="PF('wdgDatos').hide()" update=":form:data"/>
+            <p:commandButton value="#{appBean.btnAccion}" action="#{appBean.operar()}" oncomplete="PF('wdgDatos').hide()" update=":form"/>
+            <p:commandButton value="Eliminar" action="#{appBean.deleteApp()}" oncomplete="PF('wdgDatos').hide()" update=":form"/>
             <p:commandButton value="Cancelar" oncomplete="PF('wdgDatos').hide()" immediate="true"/>
         </h:form>
     </p:dialog>

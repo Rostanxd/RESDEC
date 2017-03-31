@@ -21,6 +21,9 @@ public class app implements Serializable{
     @Column(name = "appDescripcion")
     private String appDescripcion;
 
+    @Column(name = "appEstado")
+    private String appEstado;
+
 //    ATT RELACIONES
     @OneToMany(mappedBy = "app")
     private Set<dispositivoApp> dsps = new HashSet<dispositivoApp>(0);
@@ -62,6 +65,12 @@ public class app implements Serializable{
         this.appDescripcion = appDescripcion;
     }
 
+    public app(String appDescripcion, String appEstado, Set<dispositivoApp> dsps) {
+        this.appDescripcion = appDescripcion;
+        this.appEstado = appEstado;
+        this.dsps = dsps;
+    }
+
     //  GETTER Y SETTERS
     public long getAppCodigo() {
         return appCodigo;
@@ -77,6 +86,14 @@ public class app implements Serializable{
 
     public void setAppDescripcion(String appDescripcion) {
         this.appDescripcion = appDescripcion;
+    }
+
+    public String getAppEstado() {
+        return appEstado;
+    }
+
+    public void setAppEstado(String appEstado) {
+        this.appEstado = appEstado;
     }
 
     public Set<dispositivoApp> getDsps() {

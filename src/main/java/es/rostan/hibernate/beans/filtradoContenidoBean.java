@@ -1,8 +1,10 @@
 package es.rostan.hibernate.beans;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import es.rostan.hibernate.dao.appDAO;
 import es.rostan.hibernate.dao.matrizBooleanaDAO;
@@ -98,6 +100,7 @@ public class filtradoContenidoBean {
         }
 
         System.out.println("Fin del Proceso...");
+        FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO,"Sistema de Recomendación: Calculo terminado.","Exito"));
     }
 
 //    Ordena las Caracteristicas por la subcategoria

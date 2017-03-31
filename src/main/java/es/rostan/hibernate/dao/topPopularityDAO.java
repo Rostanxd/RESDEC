@@ -1,5 +1,6 @@
 package es.rostan.hibernate.dao;
 
+import es.rostan.hibernate.entidades.app;
 import es.rostan.hibernate.entidades.dispositivo;
 import es.rostan.hibernate.entidades.topPopularity;
 
@@ -52,5 +53,13 @@ public class topPopularityDAO {
         }
 
         return lstTopPopularity;
+    }
+
+    public List<app> cargarAppsNuevas(){
+        List<app> lstApp = new ArrayList<app>();
+        EntityManager em = emf.createEntityManager();
+        Query qry = em.createQuery("SELECT a FROM app a WHERE a.appEstado = 'N'", app.class);
+        lstApp = (List<app>) qry.getResultList();
+        return lstApp;
     }
 }

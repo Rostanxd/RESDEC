@@ -9,8 +9,10 @@ import es.rostan.hibernate.entidades.dispositivo;
 import es.rostan.hibernate.entidades.metodo;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -107,6 +109,11 @@ public class filtradoColaborativoBean {
         System.out.println("Sistema de Recomendación: Calculo terminado.");
 
         System.out.println(this.lstCoeffPearson.size());
+        if (this.lstCoeffPearson.size() == 0) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Sistema de Recomendación: No hay dispositivos relacionados.", "Error"));
+        }else{
+            FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO,"Sistema de Recomendación: Calculo terminado.","Exito"));
+        }
     }
 
     public void orderDsc(List<coeffPearResultSet> lstCp){

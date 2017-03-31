@@ -5,59 +5,108 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:of="http://omnifaces.org/functions">
 <h:head>
     <title>Vivant 1.0 - Dispositivo</title>
 </h:head>
 <h:body>
     <h:form id="form">
-        <p:growl id="msj" autoUpdate="true"/>
+        <p:growl id="msj2" autoUpdate="true"/>
+        <!--Tabla-->
+        <table align="center" id="table">
+            <tr>
+                <td>
+                    <img src="resources/images/RESDEC-L.jpg" alt="" width="170px" height="140px"/>
+                </td>
+                <td>
+                    <strong></strong>
+                </td>
+            </tr>
+            <tr>
+                <td style="vertical-align: top">
+                    <!--Menu de tabla-->
+                    <p:menu >
+                        <p:submenu label="Dispositivo"  style=" border-color: transparent; background-image: url(resources/images/fondo.jpg);color:white;font-size:10pt; text-align:center;">
+                            <p:menuitem value="Ingresar" style="font-size: smaller" oncomplete="PF('wdgDatos').show();" actionListener="#{dispositivoBean.setBtnAccion('Ingresar')}" update=":dlgDatos"/>
+                        </p:submenu>
+                        <p:submenu label="Inicio"  style=" border-color: transparent; background-image: url(resources/images/fondo.jpg);color:white;font-size:10pt; text-align:center;">
+                            <p:menuitem value="Menu Principal" style="font-size: smaller" url="index.xhtml?faces-redirect=true" />
+                        </p:submenu>
+                        <p:submenu label="Entorno de Despliegue"  style=" border-color: transparent; background-image: url(resources/images/fondo.jpg);color:white;font-size:10pt; text-align:center;">
+                            <p:menuitem value="Dispositivo" style="font-size: smaller" action="dispositivos?faces-redirect=true" />
+                            <p:menuitem value="Apps" style="font-size: smaller" action="app?faces-redirect=true" />
+                        </p:submenu>
+                        <p:submenu label="Recomendaciones" style="border-color: transparent;background-image: url(resources/images/fondo.jpg);color:white;font-size:10pt; text-align:center;">
+                            <p:menuitem value="Arranque en cero" style="font-size: smaller" action="sisTop?faces-redirect=true" />
+                            <p:menuitem value="Transición de una configuración a otra" style="font-size: smaller" action="sisVivColaborativa_new?faces-redirect=true"/>
+                            <p:menuitem value="Transición de configuraciones basados en features" style="font-size: smaller" action="sisVivContenido_new?faces-redirect=true" />
+                        </p:submenu>
+                    </p:menu>
+                </td>
+                <td>
+                    <!--DataTable de los dispositivos-->
+                    <p:dataTable id="data" var="dispositivo" value="#{dispositivoBean.lstDsp}" style="font-size: smaller; width: 800px;" paginator="true" rows="4"   emptyMessage="No hay datos." scrollable="true" scrollHeight="500px">
+                        <f:facet style="background-image:url(resources/images/fondo.jpg)" name="header"  >
+                            Dispositivos
+                        </f:facet>
+                        <p:column style="width: 100px; text-align: center">
+                            <img src="resources/images/#{dispositivo.dspCodigo}.jpg" alt="" height="133px"/>
+                        </p:column>
 
-        <!--DataTable de los dispositivos-->
-        <p:dataTable id="data" var="dispositivo" value="#{dispositivoBean.lstDsp}" emptyMessage="No hay datos." scrollable="true" scrollWidth="100%" scrollHeight="500px">
-            <f:facet name="header">
-                Dispositivos
-            </f:facet>
-            <p:column style="width: 200px; text-align: center">
-                <img src="resources/images/#{dispositivo.dspCodigo}.jpg" alt="" width="100px" height="133px"/>
-            </p:column>
-            <p:column headerText="Código" filterBy="#{dispositivo.dspCodigo}" filterMatchMode="contains">
-                <p:outputLabel value="#{dispositivo.dspCodigo}"/>
-            </p:column>
-            <p:column headerText="Estado">
-                <p:outputLabel value="#{dispositivo.dspEstado}">
-                    <f:converter converterId="estadoConverter"/>
-                </p:outputLabel>
-            </p:column>
-            <p:column headerText="Marca" filterBy="#{dispositivo.marca.mrcNombre}" filterMatchMode="contains">
-                <p:outputLabel value="#{dispositivo.marca.mrcNombre}"/>
-            </p:column>
-            <p:column headerText="Modelo" filterBy="#{dispositivo.modelo.mdlNombre}" filterMatchMode="contains">
-                <p:outputLabel value="#{dispositivo.modelo.mdlNombre}"/>
-            </p:column>
-            <p:column style="width: 50px;text-align: center">
-                <p:commandButton action="#{dispositivoBean.searchDsp(dispositivo)}" oncomplete="PF('wdgDatos').show()" icon="ui-icon-search" title="View" update=":dlgDatos" >
-                    <f:setPropertyActionListener value="#{dispositivo}" target="#{dispositivoBean.dispositivo}"/>
-                </p:commandButton>
-            </p:column>
-        </p:dataTable>
+                        <p:column headerText="Código" filterBy="#{dispositivo.dspCodigo}" filterMatchMode="contains" style="width: 150px">
+                            <p:outputLabel value="#{dispositivo.dspCodigo}"/>
+                        </p:column>
 
-        <!--Botones-->
-        <p:commandButton value="Ingresar" id="ingresar" oncomplete="PF('wdgDatos').show();" actionListener="#{DispositivoBean.setBtnAccion('Ingresar')}" update=":dlgDatos"/>
-        <p:commandButton value="Menu Principal" id="index" action="index"/>
+                        <p:column headerText="Marca" filterBy="#{dispositivo.marca.mrcNombre}" filterMatchMode="contains" style="width: 150px">
+                            <p:outputLabel value="#{dispositivo.marca.mrcNombre}"/>
+                        </p:column>
+                        <p:column headerText="Modelo" filterBy="#{dispositivo.modelo.mdlNombre}" filterMatchMode="contains" style="width: 150px">
+                            <p:outputLabel value="#{dispositivo.modelo.mdlNombre}"/>
+                        </p:column>
+
+                        <p:column headerText="Estado" style="width: 50px; align-items: center;">
+                            <p:outputLabel value="#{dispositivo.dspEstado}">
+                                <f:converter converterId="estadoConverter"/>
+                            </p:outputLabel>
+                        </p:column>
+
+                        <p:column style="width: 50px;text-align: center">
+                            <p:commandButton action="#{dispositivoBean.searchDsp(dispositivo)}" oncomplete="PF('wdgDatos').show()" icon="ui-icon-search" title="View" update=":dlgDatos" >
+                                <f:setPropertyActionListener value="#{dispositivo}" target="#{dispositivoBean.dispositivo}"/>
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
+                </td>
+            </tr>
+        </table>
     </h:form>
 
     <!--Dialog para dispositivo-->
-    <p:dialog id="dlgDatos" header="Datos" widgetVar="wdgDatos" modal="true">
-        <h:form>
+    <p:dialog id="dlgDatos" header="Dispositivo - Datos" widgetVar="wdgDatos" modal="true">
+        <h:form id="formDialog">
             <p:panelGrid columns="2">
                 <p:outputLabel value="Código" style="font-weight: bold"/>
-                <p:inputText value="#{dispositivoBean.dispositivo.dspCodigo}" disabled="true"/>
+                <p:inputText value="#{dispositivoBean.dispositivo.dspCodigo}" disabled="#{dispositivoBean.dspCodigoDisabled}"/>
+
                 <p:outputLabel value="Descripción" style="font-weight: bold"/>
                 <p:inputText value="#{dispositivoBean.dispositivo.dspDescripcion}"/>
+
+                <p:outputLabel value="Marca" style="font-weight: bold"/>
+                <p:selectOneMenu value="#{dispositivoBean.dispositivo.marca}" converter="marcaConverter" style="width: 125px">
+                    <f:selectItem noSelectionOption="true" itemLabel="Seleccione" itemValue="#{null}"/>
+                    <f:selectItems value="#{dispositivoBean.lstMarcas}" var="marca" itemLabel="#{marca.mrcNombre}" itemValue="#{marca}" />
+                </p:selectOneMenu>
+
+                <p:outputLabel value="Modelo" style="font-weight: bold"/>
+                <p:selectOneMenu value="#{dispositivoBean.dispositivo.modelo}" converter="modeloConverter" style="width: 125px">
+                    <f:selectItem noSelectionOption="true" itemLabel="Seleccione" itemValue="#{null}"/>
+                    <f:selectItems value="#{dispositivoBean.lstModelos}" var="modelo" itemLabel="#{modelo.mdlNombre}" itemValue="#{modelo}" />
+                </p:selectOneMenu>
+
                 <p:outputLabel value="Estado" style="font-weight: bold"/>
                 <p:selectOneMenu value="#{dispositivoBean.dispositivo.dspEstado}" style="width: 125px">
-                    <f:selectItem itemLabel="Select One" itemValue=""/>
                     <f:selectItem itemLabel="Activo" itemValue="A"/>
                     <f:selectItem itemLabel="Inactivo" itemValue="I"/>
                 </p:selectOneMenu>

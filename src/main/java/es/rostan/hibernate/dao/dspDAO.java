@@ -64,6 +64,8 @@ public class dspDAO {
 
             dspOld.setDspEstado(dsp.getDspEstado());
             dspOld.setDspDescripcion(dsp.getDspDescripcion());
+            dspOld.setMarca(dsp.getMarca());
+            dspOld.setModelo(dsp.getModelo());
 
             man.getTransaction().commit();
         }catch(Exception e){
@@ -111,4 +113,12 @@ public class dspDAO {
 
     }
 
+    public long secuenciaDsp(){
+        long secuencia = 0;
+        EntityManager em = emf.createEntityManager();
+        Query qry = em.createQuery("SELECT MAX(d.dspCodigo) FROM dispositivo d ");
+        secuencia = Long.parseLong(String.valueOf(qry.getSingleResult()));
+
+        return secuencia +1;
+    }
 }

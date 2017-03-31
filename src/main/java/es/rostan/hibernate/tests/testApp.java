@@ -4,6 +4,7 @@ import es.rostan.hibernate.entidades.app;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import java.util.List;
 
 /**
@@ -14,14 +15,15 @@ public class testApp {
 
     public  static void main(String[] args){
 
-        EntityManager man = emf.createEntityManager();
-        app a = new app(1, "FaceBook");
-        man.getTransaction().begin();
-        man.persist(a);
-        man.getTransaction().commit();
-        man.close();
+//        EntityManager man = emf.createEntityManager();
+//        app a = new app(1, "FaceBook");
+//        man.getTransaction().begin();
+//        man.persist(a);
+//        man.getTransaction().commit();
+//        man.close();
+//        imprimirTodo();
 
-        imprimirTodo();
+        estadoAppDesplegadas();
 
     }
 
@@ -34,6 +36,15 @@ public class testApp {
             System.out.println(a.toString());
         }
         man.close();
+    }
+
+    public static void estadoAppDesplegadas(){
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        Query qry = em.createQuery("UPDATE app SET appEstado = 'D'");
+        qry.executeUpdate();
+        em.getTransaction().commit();
+        em.close();
     }
 
 }

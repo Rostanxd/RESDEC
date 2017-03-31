@@ -49,6 +49,9 @@ public class appBean {
     public void setBtnAccion(String btnAccion) {
         this.limpiar();
         this.btnAccion = btnAccion;
+        if (btnAccion.equals("Ingresar")){
+            this.secuenciaApp();
+        }
     }
 
     public void operar() throws Exception{
@@ -79,10 +82,9 @@ public class appBean {
         }
     }
 
-
-
     public void insertApp() throws Exception{
         appDAO ad = new appDAO();
+        this.app.setAppEstado("N");
         ad.insertApp(this.app);
     }
 
@@ -103,5 +105,10 @@ public class appBean {
     public void deleteApp() throws Exception{
         appDAO ad = new appDAO();
         ad.deleteApp(this.app);
+    }
+
+    public void secuenciaApp(){
+        appDAO ad = new appDAO();
+        this.app.setAppCodigo(ad.secuenciaApp());
     }
 }

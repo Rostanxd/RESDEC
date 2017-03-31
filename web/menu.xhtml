@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Vivant 1.0</title>
+
+</h:head>
+<h:body>
+    <ui:composition template="./WEB-INF/templates/plantilla.xhtml">
+        <ui:define name="content">
+            <table align="center">
+                <tr>
+                    <td>
+                        <h:form name="menu" >
+                            <p:growl id="msj" showDetail="false"/>
+                            <p:menu >
+                                <p:submenu label="Entorno de Despliegue"  style=" border-color: transparent; background-image: url(resources/images/fondo.jpg);color:white;font-size:10pt; text-align:center;">
+                                    <p:menuitem value="Dispositivo" style="font-size: smaller" action="dispositivos?faces-redirect=true" />
+                                    <p:menuitem value="Apps" style="font-size: smaller" action="app?faces-redirect=true" />
+                                </p:submenu>
+                                <p:submenu label="Recomendaciones" style="border-color: transparent;background-image: url(resources/images/fondo.jpg);color:white;font-size:10pt; text-align:center;">
+                                    <p:menuitem value="Arranque en cero" style="font-size: smaller" action="sisTop?faces-redirect=true" />
+                                    <p:menuitem value="Transición de una configuración a otra" style="font-size: smaller" action="sisVivColaborativa_new?faces-redirect=true"/>
+                                    <p:menuitem value="Transición de configuraciones basados en features" style="font-size: smaller" action="sisVivContenido_new?faces-redirect=true" />
+                                </p:submenu>
+                            </p:menu>
+                        </h:form>
+                    </td>
+                </tr>
+            </table>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

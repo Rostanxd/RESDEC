@@ -75,4 +75,13 @@ public class appDAO {
             man.close();
         }
     }
+
+    public long secuenciaApp(){
+        long secuencia = 0;
+        EntityManager em = emf.createEntityManager();
+        Query qry = em.createQuery("SELECT MAX(a.appCodigo) FROM app a ");
+        secuencia = Long.parseLong(String.valueOf(qry.getSingleResult()));
+
+        return secuencia +1;
+    }
 }

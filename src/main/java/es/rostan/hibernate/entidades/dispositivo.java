@@ -36,11 +36,11 @@ public class dispositivo implements Serializable{
     @OneToMany(mappedBy = "dsp")
     private Set<usrDspAppValoracion> usrVotaciones = new HashSet<usrDspAppValoracion>(0);
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "mrcCodigo")
     private marca marca;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "mdlCodigo")
     private modelo modelo;
 

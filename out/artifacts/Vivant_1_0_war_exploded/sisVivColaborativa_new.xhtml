@@ -11,91 +11,127 @@
     </title>
 </h:head>
 <h:body>
-    <h:form id="form">
+    <h:form id="form" style="font-size:smaller">
         <p:growl id="msj" autoUpdate="true"/>
-        <p:panelGrid style="margin-top:10px">
-            <f:facet name="header">
-                <p:row>
-                    <p:column colspan="3">Transición de una Configuración a Otra</p:column>
-                </p:row>
-            </f:facet>
-            <p:row>
-                <p:column><p:outputLabel for="metodoSelected" value="Metodo a utilizar: "/></p:column>
-                <p:column colspan="2">
-                    <p:selectOneMenu id="metodoSelected" value="#{filtradoColaborativoBean.metodoSelected}" style="width:200px" effect="fold" converter="filtradoColaborativoMetodoConverter">
-                        <f:selectItems value="#{filtradoColaborativoBean.lstMetodos}"/>
-                    </p:selectOneMenu>
-                </p:column>
-            </p:row>
 
-            <p:row>
-                <p:column><p:outputLabel value="Aplicacion base: " for="appCod"/></p:column>
-                <p:column colspan="2">
-                    <p:inputText size="3" value="#{filtradoColaborativoBean.appSelected.appCodigo}" id="appCod" disabled="true">
-                        <p:ajax event="blur" update="appDescripcion"/>
-                    </p:inputText>
-                    <p:commandButton action="#{appBean.searchLstApp()}" oncomplete="PF('wdgApp').show()" icon="ui-icon-search" title="View" update=":dlgApp"/>
-                    <p:inputText size="30" value="#{filtradoColaborativoBean.appSelected.appDescripcion}" id="appDescripcion" disabled="true"/>
-                </p:column>
-            </p:row>
+        <!--Tabla-->
+        <table align="center" id="table">
+            <tr>
+                <td>
+                    <img src="resources/images/RESDEC-L.jpg" alt="" width="170px" height="140px"/>
+                </td>
+                <td>
+                    <strong></strong>
+                </td>
+            </tr>
+            <tr>
+                <td style="vertical-align: top">
+                    <!--Menu de tabla-->
+                    <p:menu >
+                        <p:submenu label="Inicio"  style=" border-color: transparent; background-image: url(resources/images/fondo.jpg);color:white;font-size:10pt; text-align:center;">
+                            <p:menuitem value="Menu Principal" style="font-size: smaller" url="index.xhtml?faces-redirect=true" />
+                        </p:submenu>
+                        <p:submenu label="Entorno de Despliegue"  style=" border-color: transparent; background-image: url(resources/images/fondo.jpg);color:white;font-size:10pt; text-align:center;">
+                            <p:menuitem value="Dispositivo" style="font-size: smaller" action="dispositivos?faces-redirect=true" />
+                            <p:menuitem value="Apps" style="font-size: smaller" action="app?faces-redirect=true" />
+                        </p:submenu>
+                        <p:submenu label="Recomendaciones" style="border-color: transparent;background-image: url(resources/images/fondo.jpg);color:white;font-size:10pt; text-align:center;">
+                            <p:menuitem value="Arranque en cero" style="font-size: smaller" action="sisTop?faces-redirect=true" />
+                            <p:menuitem value="Transición de una configuración a otra" style="font-size: smaller" action="sisVivColaborativa_new?faces-redirect=true"/>
+                            <p:menuitem value="Transición de configuraciones basados en features" style="font-size: smaller" action="sisVivContenido_new?faces-redirect=true" />
+                        </p:submenu>
+                    </p:menu>
+                </td>
+                <td style="vertical-align: top; width: 700px;">
+                    <p:panelGrid >
+                        <f:facet name="header">
+                            <p:row>
+                                <p:column style="background-image: url(resources/images/fondo.jpg); color:white; font-size: small;" colspan="3">Transición de una Configuración a Otra</p:column>
+                            </p:row>
+                        </f:facet>
+                        <p:row>
+                            <p:column><p:outputLabel for="metodoSelected" value="Metodo a utilizar: "/></p:column>
+                            <p:column colspan="2">
+                                <p:selectOneMenu id="metodoSelected" value="#{filtradoColaborativoBean.metodoSelected}" style="width:200px" effect="fold" converter="filtradoColaborativoMetodoConverter">
+                                    <f:selectItems value="#{filtradoColaborativoBean.lstMetodos}"/>
+                                </p:selectOneMenu>
+                            </p:column>
+                        </p:row>
 
-            <p:row>
-                <p:column><p:outputLabel value="Dispositivo base: " for="dspCodigo"/></p:column>
-                <p:column colspan="2">
-                    <p:inputText size="3" value="#{filtradoColaborativoBean.dspSelected.dspCodigo}" id="dspCodigo" disabled="true">
-                        <p:ajax event="blur" update="dspDescripcion"/>
-                    </p:inputText>
-                    <p:commandButton oncomplete="PF('wdgDsp').show()" icon="ui-icon-search" title="View" update=":dlgDsp"/>
-                    <p:inputText size="30" value="#{filtradoColaborativoBean.dspSelected.dspDescripcion}" id="dspDescripcion" disabled="true"/>
-                </p:column>
-            </p:row>
+                        <p:row>
+                            <p:column><p:outputLabel value="Aplicacion base: " for="appCod"/></p:column>
+                            <p:column colspan="2">
+                                <p:inputText size="3" value="#{filtradoColaborativoBean.appSelected.appCodigo}" id="appCod" disabled="true">
+                                    <p:ajax event="blur" update="appDescripcion"/>
+                                </p:inputText>
+                                <p:commandButton action="#{appBean.searchLstApp()}" oncomplete="PF('wdgApp').show()" icon="ui-icon-search" title="View" update=":dlgApp"/>
+                                <p:inputText size="30" value="#{filtradoColaborativoBean.appSelected.appDescripcion}" id="appDescripcion" disabled="true"/>
+                            </p:column>
+                        </p:row>
 
-            <p:row>
-                <p:column><p:outputLabel value="No. registros" for="noReg"/></p:column>
-                <p:column colspan="2"><p:inputText size="3" id="noReg" value="#{filtradoColaborativoBean.noResultados}"/></p:column>
-            </p:row>
+                        <p:row>
+                            <p:column><p:outputLabel value="Dispositivo base: " for="dspCodigo"/></p:column>
+                            <p:column colspan="2">
+                                <p:inputText size="9" value="#{filtradoColaborativoBean.dspSelected.dspCodigo}" id="dspCodigo" disabled="true">
+                                    <p:ajax event="blur" update="dspDescripcion"/>
+                                </p:inputText>
+                                <p:commandButton oncomplete="PF('wdgDsp').show()" icon="ui-icon-search" title="View" update=":dlgDsp"/>
+                                <p:inputText size="30" value="#{filtradoColaborativoBean.dspSelected.dspDescripcion}" id="dspDescripcion" disabled="true"/>
+                            </p:column>
+                        </p:row>
 
-            <p:row>
-                <p:column><p:outputLabel value="Ordenar:" for="order"/></p:column>
-                <p:column colspan="2">
-                    <p:selectOneMenu id="order" value="#{filtradoColaborativoBean.ordenResultados}" style="width:200px">
-                        <f:selectItem itemLabel="Seleccione" itemValue="" />
-                        <f:selectItem itemLabel="Ascendente" itemValue="asc" />
-                        <f:selectItem itemLabel="Descendente" itemValue="dsc" />
-                    </p:selectOneMenu>
-                </p:column>
-            </p:row>
-        </p:panelGrid>
+                        <p:row>
+                            <p:column><p:outputLabel value="No. registros" for="noReg"/></p:column>
+                            <p:column colspan="2"><p:inputText size="3" id="noReg" value="#{filtradoColaborativoBean.noResultados}"/></p:column>
+                        </p:row>
 
-        <p:commandButton value="Calcular" action="#{filtradoColaborativoBean.calcularColaborativo()}" update="form"/>
-        <p:commandButton value="Menu Principal" action="index"/>
+                        <p:row>
+                            <p:column><p:outputLabel value="Ordenar:" for="order"/></p:column>
+                            <p:column colspan="2">
+                                <p:selectOneMenu id="order" value="#{filtradoColaborativoBean.ordenResultados}" style="width:200px">
+                                    <f:selectItem itemLabel="Seleccione" itemValue="" />
+                                    <f:selectItem itemLabel="Ascendente" itemValue="asc" />
+                                    <f:selectItem itemLabel="Descendente" itemValue="dsc" />
+                                </p:selectOneMenu>
+                            </p:column>
+                        </p:row>
+                    </p:panelGrid>
 
-        <!--Ring-->
-        <p:ring id="ringResults" value="#{filtradoColaborativoBean.lstCoeffPearson}" var="dspRes" styleClass="image-ring" easing="easeInOutBack">
-            <p:panelGrid style="text-align: center">
-                <f:facet name="header">
-                    <p:row>
-                        <p:column><p:outputLabel value="#{dspRes.dspRs.dspDescripcion}"/></p:column>
-                    </p:row>
-                </f:facet>
-                <p:row>
-                    <p:column><img src="resources/images/#{dspRes.dspRs.dspCodigo}.jpg" alt="" width="200px" height="265px"/></p:column>
-                </p:row>
-                <p:row>
-                    <p:column><p:commandButton icon="ui-icon-search" title="Dispositivo" oncomplete="PF('wdgDspCrc').show();" action="#{cofPerResSetBean.dspSelected(dspRes)}"/></p:column>
-                </p:row>
-                <p:row>
-                    <p:column><p:outputLabel value="#{filtradoColaborativoBean.metodoSelected.metDescripcion}"/></p:column>
-                </p:row>
-                <p:row>
-                    <p:column><p:outputLabel value="#{dspRes.valRs}"/></p:column>
-                </p:row>
-            </p:panelGrid>
-        </p:ring>
+                    <p:commandButton value="Calcular" style="font-size:smaller" action="#{filtradoColaborativoBean.calcularColaborativo()}" update="form"/>
 
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <!--Ring-->
+                    <p:ring id="ringResults" value="#{filtradoColaborativoBean.lstCoeffPearson}" var="dspRes" styleClass="image-ring" easing="easeInOutBack">
+                        <p:panelGrid style="text-align: center">
+                            <f:facet name="header">
+                                <p:row>
+                                    <p:column><p:outputLabel value="#{dspRes.dspRs.dspDescripcion}"/></p:column>
+                                </p:row>
+                            </f:facet>
+                            <p:row>
+                                <p:column><img src="resources/images/#{dspRes.dspRs.dspCodigo}.jpg" alt="" width="200px" height="265px"/></p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column><p:commandButton icon="ui-icon-search" title="Dispositivo" oncomplete="PF('wdgDspCrc').show();" action="#{cofPerResSetBean.dspSelected(dspRes)}"/></p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column><p:outputLabel value="#{filtradoColaborativoBean.metodoSelected.metDescripcion}"/></p:column>
+                            </p:row>
+                            <p:row>
+                                <p:column><p:outputLabel value="#{dspRes.valRs}"/></p:column>
+                            </p:row>
+                        </p:panelGrid>
+                    </p:ring>
+                </td>
+            </tr>
+        </table>
     </h:form>
+
     <!--Dialog de busqueda de aplicacion base-->
-    <p:dialog id="dlgApp" header="Apps" widgetVar="wdgApp" modal="true" width="750">
+    <p:dialog id="dlgApp" header="Busqueda" widgetVar="wdgApp" modal="true" width="750" style="font-size: smaller">
         <h:form>
             <p:dataTable id="dataApp" var="app" value="#{filtradoColaborativoBean.lstApp}" emptyMessage="No hay datos." scrollable="true" scrollWidth="100%" scrollHeight="500">
                 <f:facet name="header">
@@ -114,7 +150,7 @@
         </h:form>
     </p:dialog>
     <!--Dialog de busqueda de dispositvo base-->
-    <p:dialog id="dlgDsp" header="Dispositivos" widgetVar="wdgDsp" modal="true" width="750">
+    <p:dialog id="dlgDsp" header="Busqueda" widgetVar="wdgDsp" modal="true" width="750" style="font-size: smaller">
         <h:form>
             <p:dataTable id="dataDsp" var="dispositivo" value="#{filtradoColaborativoBean.lstDispositivo}" emptyMessage="No hay datos." scrollable="true" scrollWidth="100%" scrollHeight="500">
                 <f:facet name="header">

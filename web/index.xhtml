@@ -7,22 +7,37 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
 <h:head>
    <title>Vivant 1.0</title>
+
 </h:head>
 <h:body>
-   <h:form>
+   <h:form name="menu" >
       <p:growl id="msj" showDetail="false"/>
-      <h3 style="margin-top:0">SISTEMA DE RECOMENDACION - VIVANT 1.0</h3>
-      <p:menu>
-         <p:submenu label="Maestro">
-            <p:menuitem value="Dispositivos" action="dispositivos?faces-redirect=true" />
-         </p:submenu>
-         <p:submenu label="Recomendacion">
-            <p:menuitem value="Top Popularity o Arranque en Cero" action="sisTop?faces-redirect=true" />
-            <p:menuitem value="Transicion de una Configuracion a otra - Colaborativa" action="sisVivColaborativa_new?faces-redirect=true"/>
-            <p:menuitem value="Transicion de una Configuracion a otra - Contenido" action="sisVivContenido_new?faces-redirect=true" />
-            <p:menuitem value="Basado en el Historico del Deployment" action="dspApps?faces-redirect=true"/>
-         </p:submenu>
-      </p:menu>
+      <table align="center">
+         <tr>
+            <td>
+               <img src="resources/images/RESDEC-L.jpg" alt="" width="170px" height="140px"/>
+            </td>
+            <td><strong></strong></td>
+         </tr>
+         <tr style="vertical-align: top ">
+            <td>
+               <p:menu >
+                  <p:submenu label="Entorno de Despliegue"  style=" border-color: transparent; background-image: url(resources/images/fondo.jpg);color:white;font-size:10pt; text-align:center;">
+                     <p:menuitem value="Dispositivo" style="font-size: smaller" action="dispositivos?faces-redirect=true" />
+                     <p:menuitem value="Apps" style="font-size: smaller" action="app?faces-redirect=true" />
+                  </p:submenu>
+                  <p:submenu label="Recomendaciones" style="border-color: transparent;background-image: url(resources/images/fondo.jpg);color:white;font-size:10pt; text-align:center;">
+                     <p:menuitem value="Arranque en cero" style="font-size: smaller" action="sisTop?faces-redirect=true" />
+                     <p:menuitem value="Transición de una configuración a otra" style="font-size: smaller" action="sisVivColaborativa_new?faces-redirect=true"/>
+                     <p:menuitem value="Transición de configuraciones basados en features" style="font-size: smaller" action="sisVivContenido_new?faces-redirect=true" />
+                  </p:submenu>
+               </p:menu>
+            </td>
+            <td>
+               <img src="resources/images/barner.jpg" alt="" width="700px" height="360px"/>
+            </td>
+         </tr>
+      </table>
    </h:form>
 </h:body>
 </html>

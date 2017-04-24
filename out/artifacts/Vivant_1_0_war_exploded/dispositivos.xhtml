@@ -28,20 +28,20 @@
                 <td style="vertical-align: top">
                     <!--Menu de tabla-->
                     <p:menu >
-                        <p:submenu label="Dispositivo"  style=" border-color: transparent; background-image: url(resources/images/fondo.jpg);color:white;font-size:10pt; text-align:center;">
-                            <p:menuitem value="Ingresar" style="font-size: smaller" oncomplete="PF('wdgDatos').show();" actionListener="#{dispositivoBean.setBtnAccion('Ingresar')}" update=":dlgDatos"/>
+                        <p:submenu label="Product"  style=" border-color: transparent; background-image: url(resources/images/fondo.jpg);color:white;font-size:10pt; text-align:center;">
+                            <p:menuitem value="New" style="font-size: smaller" oncomplete="PF('wdgDatos').show();" actionListener="#{dispositivoBean.setBtnAccion('Ingresar')}" update=":dlgDatos"/>
                         </p:submenu>
-                        <p:submenu label="Inicio"  style=" border-color: transparent; background-image: url(resources/images/fondo.jpg);color:white;font-size:10pt; text-align:center;">
-                            <p:menuitem value="Menu Principal" style="font-size: smaller" url="index.xhtml?faces-redirect=true" />
+                        <p:submenu label="Home"  style=" border-color: transparent; background-image: url(resources/images/fondo.jpg);color:white;font-size:10pt; text-align:center;">
+                            <p:menuitem value="Principal Menu" style="font-size: smaller" url="index.xhtml?faces-redirect=true" />
                         </p:submenu>
-                        <p:submenu label="Entorno de Despliegue"  style=" border-color: transparent; background-image: url(resources/images/fondo.jpg);color:white;font-size:10pt; text-align:center;">
-                            <p:menuitem value="Dispositivo" style="font-size: smaller" action="dispositivos?faces-redirect=true" />
-                            <p:menuitem value="Apps" style="font-size: smaller" action="app?faces-redirect=true" />
+                        <p:submenu label="Deployment environment"  style=" border-color: transparent; background-image: url(resources/images/fondo.jpg);color:white;font-size:10pt; text-align:center;">
+                            <p:menuitem value="Products" style="font-size: smaller" action="dispositivos?faces-redirect=true" />
+                            <p:menuitem value="Users" style="font-size: smaller" action="app?faces-redirect=true" />
                         </p:submenu>
-                        <p:submenu label="Recomendaciones" style="border-color: transparent;background-image: url(resources/images/fondo.jpg);color:white;font-size:10pt; text-align:center;">
-                            <p:menuitem value="Arranque en cero" style="font-size: smaller" action="sisTop?faces-redirect=true" />
-                            <p:menuitem value="Transición de una configuración a otra" style="font-size: smaller" action="sisVivColaborativa_new?faces-redirect=true"/>
-                            <p:menuitem value="Transición de configuraciones basados en features" style="font-size: smaller" action="sisVivContenido_new?faces-redirect=true" />
+                        <p:submenu label="Recommendations" style="border-color: transparent;background-image: url(resources/images/fondo.jpg);color:white;font-size:10pt; text-align:center;">
+                            <p:menuitem value="Zero Start" style="font-size: smaller" action="sisTop?faces-redirect=true" />
+                            <p:menuitem value="Configuration Transition Based on Ratings" style="font-size: smaller" action="sisVivColaborativa_new?faces-redirect=true"/>
+                            <p:menuitem value="Configuration Transition Based on Features" style="font-size: smaller" action="sisVivContenido_new?faces-redirect=true" />
                         </p:submenu>
                     </p:menu>
                 </td>
@@ -49,24 +49,24 @@
                     <!--DataTable de los dispositivos-->
                     <p:dataTable id="data" var="dispositivo" value="#{dispositivoBean.lstDsp}" style="font-size: smaller; width: 800px;" paginator="true" rows="4"   emptyMessage="No hay datos." scrollable="true" scrollHeight="500px">
                         <f:facet style="background-image:url(resources/images/fondo.jpg)" name="header"  >
-                            Dispositivos
+                            Products
                         </f:facet>
                         <p:column style="width: 100px; text-align: center">
                             <img src="resources/images/#{dispositivo.dspCodigo}.jpg" alt="" height="133px"/>
                         </p:column>
 
-                        <p:column headerText="Código" filterBy="#{dispositivo.dspCodigo}" filterMatchMode="contains" style="width: 150px">
+                        <p:column headerText="Id" filterBy="#{dispositivo.dspCodigo}" filterMatchMode="contains" style="width: 150px">
                             <p:outputLabel value="#{dispositivo.dspCodigo}"/>
                         </p:column>
 
-                        <p:column headerText="Marca" filterBy="#{dispositivo.marca.mrcNombre}" filterMatchMode="contains" style="width: 150px">
+                        <p:column headerText="Brand" filterBy="#{dispositivo.marca.mrcNombre}" filterMatchMode="contains" style="width: 150px">
                             <p:outputLabel value="#{dispositivo.marca.mrcNombre}"/>
                         </p:column>
-                        <p:column headerText="Modelo" filterBy="#{dispositivo.modelo.mdlNombre}" filterMatchMode="contains" style="width: 150px">
+                        <p:column headerText="Model" filterBy="#{dispositivo.modelo.mdlNombre}" filterMatchMode="contains" style="width: 150px">
                             <p:outputLabel value="#{dispositivo.modelo.mdlNombre}"/>
                         </p:column>
 
-                        <p:column headerText="Estado" style="width: 50px; align-items: center;">
+                        <p:column headerText="State" style="width: 50px; align-items: center;">
                             <p:outputLabel value="#{dispositivo.dspEstado}">
                                 <f:converter converterId="estadoConverter"/>
                             </p:outputLabel>
@@ -84,44 +84,44 @@
     </h:form>
 
     <!--Dialog para dispositivo-->
-    <p:dialog id="dlgDatos" header="Dispositivo - Datos" widgetVar="wdgDatos" modal="true">
+    <p:dialog id="dlgDatos" header="Product Information" widgetVar="wdgDatos" modal="true">
         <h:form id="formDialog">
             <p:panelGrid columns="2">
-                <p:outputLabel value="Código" style="font-weight: bold"/>
+                <p:outputLabel value="Code" style="font-weight: bold"/>
                 <p:inputText value="#{dispositivoBean.dispositivo.dspCodigo}" disabled="#{dispositivoBean.dspCodigoDisabled}"/>
 
-                <p:outputLabel value="Descripción" style="font-weight: bold"/>
+                <p:outputLabel value="Name" style="font-weight: bold"/>
                 <p:inputText value="#{dispositivoBean.dispositivo.dspDescripcion}"/>
 
-                <p:outputLabel value="Marca" style="font-weight: bold"/>
+                <p:outputLabel value="Brand" style="font-weight: bold"/>
                 <p:selectOneMenu value="#{dispositivoBean.dispositivo.marca}" converter="marcaConverter" style="width: 125px">
                     <f:selectItem noSelectionOption="true" itemLabel="Seleccione" itemValue="#{null}"/>
                     <f:selectItems value="#{dispositivoBean.lstMarcas}" var="marca" itemLabel="#{marca.mrcNombre}" itemValue="#{marca}" />
                 </p:selectOneMenu>
 
-                <p:outputLabel value="Modelo" style="font-weight: bold"/>
+                <p:outputLabel value="Model" style="font-weight: bold"/>
                 <p:selectOneMenu value="#{dispositivoBean.dispositivo.modelo}" converter="modeloConverter" style="width: 125px">
                     <f:selectItem noSelectionOption="true" itemLabel="Seleccione" itemValue="#{null}"/>
                     <f:selectItems value="#{dispositivoBean.lstModelos}" var="modelo" itemLabel="#{modelo.mdlNombre}" itemValue="#{modelo}" />
                 </p:selectOneMenu>
 
-                <p:outputLabel value="Estado" style="font-weight: bold"/>
+                <p:outputLabel value="State" style="font-weight: bold"/>
                 <p:selectOneMenu value="#{dispositivoBean.dispositivo.dspEstado}" style="width: 125px">
-                    <f:selectItem itemLabel="Activo" itemValue="A"/>
-                    <f:selectItem itemLabel="Inactivo" itemValue="I"/>
+                    <f:selectItem itemLabel="Active" itemValue="A"/>
+                    <f:selectItem itemLabel="Inactive" itemValue="I"/>
                 </p:selectOneMenu>
             </p:panelGrid>
             <!--DataList de los caracteristicas-->
             <p:dataList value="#{dispositivoBean.dispositivo.crcs}" var="caracteristica" type="Caracteristica">
                 <f:facet name="header">
-                    Características
+                    Features
                 </f:facet>
                 - #{caracteristica.subcategoria.subDescripcion}: #{caracteristica.crcDescripcion}
             </p:dataList>
             <!--Botones-->
             <p:commandButton value="#{dispositivoBean.btnAccion}" action="#{dispositivoBean.operar()}" oncomplete="PF('wdgDatos').hide()" update="form:data"/>
-            <p:commandButton value="Eliminar" action="#{dispositivoBean.deleteDsp()}" oncomplete="PF('wdgDatos').hide()" update="form:data"/>
-            <p:commandButton value="Cancelar" oncomplete="PF('wdgDatos').hide()" immediate="true"/>
+            <p:commandButton value="Delete" action="#{dispositivoBean.deleteDsp()}" oncomplete="PF('wdgDatos').hide()" update="form:data"/>
+            <p:commandButton value="Cancel" oncomplete="PF('wdgDatos').hide()" immediate="true"/>
         </h:form>
     </p:dialog>
 </h:body>

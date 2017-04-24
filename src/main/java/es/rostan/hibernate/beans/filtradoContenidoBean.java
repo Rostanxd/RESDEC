@@ -100,7 +100,7 @@ public class filtradoContenidoBean {
         }
 
         System.out.println("Fin del Proceso...");
-        FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO,"Sistema de Recomendación: Calculo terminado.","Exito"));
+        FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO,"RESDEC: Finished calculation.","Exito"));
     }
 
 //    Ordena las Caracteristicas por la subcategoria

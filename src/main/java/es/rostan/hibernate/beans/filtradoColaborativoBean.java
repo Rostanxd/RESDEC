@@ -63,7 +63,7 @@ public class filtradoColaborativoBean {
 //    METHODS
     private void cargaMetodos(){
         this.lstMetodos.add(new metodo(1, "Coeff. Pearson"));
-        this.lstMetodos.add(new metodo(2, "Otro"));
+        this.lstMetodos.add(new metodo(2, "Other..."));
     }
 
 //    Carga de aplicaciones para escoger;
@@ -110,9 +110,9 @@ public class filtradoColaborativoBean {
 
         System.out.println(this.lstCoeffPearson.size());
         if (this.lstCoeffPearson.size() == 0) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Sistema de Recomendación: No hay dispositivos relacionados.", "Error"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "RESDEC: There are no related products.", "Error"));
         }else{
-            FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO,"Sistema de Recomendación: Calculo terminado.","Exito"));
+            FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO,"RESDEC: Finished calculation.","Exito"));
         }
     }
 

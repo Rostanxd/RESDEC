@@ -6,7 +6,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
 <h:head>
-   <title>Vivant 1.0</title>
+   <title>RESDEC 1.0</title>
 
 </h:head>
 <h:body>
@@ -22,14 +22,17 @@
          <tr style="vertical-align: top ">
             <td>
                <p:menu >
-                  <p:submenu label="Entorno de Despliegue"  style=" border-color: transparent; background-image: url(resources/images/fondo.jpg);color:white;font-size:10pt; text-align:center;">
-                     <p:menuitem value="Dispositivo" style="font-size: smaller" action="dispositivos?faces-redirect=true" />
-                     <p:menuitem value="Apps" style="font-size: smaller" action="app?faces-redirect=true" />
+                  <p:submenu label="Home"  style=" border-color: transparent; background-image: url(resources/images/fondo.jpg);color:white;font-size:10pt; text-align:center;">
+                     <p:menuitem value="Principal Menu" style="font-size: smaller" url="index.xhtml?faces-redirect=true" />
                   </p:submenu>
-                  <p:submenu label="Recomendaciones" style="border-color: transparent;background-image: url(resources/images/fondo.jpg);color:white;font-size:10pt; text-align:center;">
-                     <p:menuitem value="Arranque en cero" style="font-size: smaller" action="sisTop?faces-redirect=true" />
-                     <p:menuitem value="Transición de una configuración a otra" style="font-size: smaller" action="sisVivColaborativa_new?faces-redirect=true"/>
-                     <p:menuitem value="Transición de configuraciones basados en features" style="font-size: smaller" action="sisVivContenido_new?faces-redirect=true" />
+                  <p:submenu label="Deployment environment"  style=" border-color: transparent; background-image: url(resources/images/fondo.jpg);color:white;font-size:10pt; text-align:center;">
+                     <p:menuitem value="Products" style="font-size: smaller" action="dispositivos?faces-redirect=true" />
+                     <p:menuitem value="Users" style="font-size: smaller" action="app?faces-redirect=true" />
+                  </p:submenu>
+                  <p:submenu label="Recommendations" style="border-color: transparent;background-image: url(resources/images/fondo.jpg);color:white;font-size:10pt; text-align:center;">
+                     <p:menuitem value="Zero Start" style="font-size: smaller" action="sisTop?faces-redirect=true" />
+                     <p:menuitem value="Configuration Transition Based on Ratings" style="font-size: smaller" action="sisVivColaborativa_new?faces-redirect=true"/>
+                     <p:menuitem value="Configuration Transition Based on Features" style="font-size: smaller" action="sisVivContenido_new?faces-redirect=true" />
                   </p:submenu>
                </p:menu>
             </td>

@@ -27,17 +27,17 @@
                 <td style="vertical-align: top;">
                     <!--Menu de tabla-->
                     <p:menu >
-                        <p:submenu label="Inicio"  style=" border-color: transparent; background-image: url(resources/images/fondo.jpg);color:white;font-size:10pt; text-align:center;">
-                            <p:menuitem value="Menu Principal" style="font-size: smaller" url="index.xhtml?faces-redirect=true" />
+                        <p:submenu label="Home"  style=" border-color: transparent; background-image: url(resources/images/fondo.jpg);color:white;font-size:10pt; text-align:center;">
+                            <p:menuitem value="Principal Menu" style="font-size: smaller" url="index.xhtml?faces-redirect=true" />
                         </p:submenu>
-                        <p:submenu label="Entorno de Despliegue"  style=" border-color: transparent; background-image: url(resources/images/fondo.jpg);color:white;font-size:10pt; text-align:center;">
-                            <p:menuitem value="Dispositivo" style="font-size: smaller" action="dispositivos?faces-redirect=true" />
-                            <p:menuitem value="Apps" style="font-size: smaller" action="app?faces-redirect=true" />
+                        <p:submenu label="Deployment environment"  style=" border-color: transparent; background-image: url(resources/images/fondo.jpg);color:white;font-size:10pt; text-align:center;">
+                            <p:menuitem value="Products" style="font-size: smaller" action="dispositivos?faces-redirect=true" />
+                            <p:menuitem value="Users" style="font-size: smaller" action="app?faces-redirect=true" />
                         </p:submenu>
-                        <p:submenu label="Recomendaciones" style="border-color: transparent;background-image: url(resources/images/fondo.jpg);color:white;font-size:10pt; text-align:center;">
-                            <p:menuitem value="Arranque en cero" style="font-size: smaller" action="sisTop?faces-redirect=true" />
-                            <p:menuitem value="Transición de una configuración a otra" style="font-size: smaller" action="sisVivColaborativa_new?faces-redirect=true"/>
-                            <p:menuitem value="Transición de configuraciones basados en features" style="font-size: smaller" action="sisVivContenido_new?faces-redirect=true" />
+                        <p:submenu label="Recommendations" style="border-color: transparent;background-image: url(resources/images/fondo.jpg);color:white;font-size:10pt; text-align:center;">
+                            <p:menuitem value="Zero Start" style="font-size: smaller" action="sisTop?faces-redirect=true" />
+                            <p:menuitem value="Configuration Transition Based on Ratings" style="font-size: smaller" action="sisVivColaborativa_new?faces-redirect=true"/>
+                            <p:menuitem value="Configuration Transition Based on Features" style="font-size: smaller" action="sisVivContenido_new?faces-redirect=true" />
                         </p:submenu>
                     </p:menu>
                 </td>
@@ -50,7 +50,9 @@
                         </f:facet>
 
                         <p:row>
-                            <p:column><p:outputLabel value="Aplicacion base: " for="appCod"/></p:column>
+                            <p:column>
+                                <p:outputLabel value="Base user: " for="appCod"/>
+                            </p:column>
                             <p:column colspan="2">
                                 <p:inputText size="3" value="#{topPopularityBean.appSelected.appCodigo}" id="appCod" disabled="true">
                                     <p:ajax event="blur" update="appDescripcion"/>
@@ -61,23 +63,23 @@
                         </p:row>
 
                         <p:row>
-                            <p:column><p:outputLabel value="No. registros" for="noReg"/></p:column>
+                            <p:column><p:outputLabel value="Number of records:" for="noReg"/></p:column>
                             <p:column colspan="2"><p:inputText size="3" id="noReg" value="#{topPopularityBean.noResultados}"/></p:column>
                         </p:row>
 
                         <p:row>
-                            <p:column><p:outputLabel value="Ordenar:" for="order"/></p:column>
+                            <p:column><p:outputLabel value="Sort:" for="order"/></p:column>
                             <p:column colspan="2">
                                 <p:selectOneMenu id="order" value="#{topPopularityBean.ordenResultados}" style="width:200px">
-                                    <f:selectItem itemLabel="Seleccione" itemValue="" />
-                                    <f:selectItem itemLabel="Ascendente" itemValue="asc" />
-                                    <f:selectItem itemLabel="Descendente" itemValue="dsc" />
+                                    <f:selectItem itemLabel="Select..." itemValue="" />
+                                    <f:selectItem itemLabel="Ascendant" itemValue="asc" />
+                                    <f:selectItem itemLabel="Falling" itemValue="dsc" />
                                 </p:selectOneMenu>
                             </p:column>
                         </p:row>
                     </p:panelGrid>
 
-                    <p:commandButton value="Calcular" style="font-size: smaller" action="#{topPopularityBean.cargaTopPopularity()}" update=":form"/>
+                    <p:commandButton value="Calculate" style="font-size: smaller" action="#{topPopularityBean.cargaTopPopularity()}" update=":form"/>
                 </td>
             </tr>
             <tr>
@@ -106,17 +108,17 @@
     <!--Dialog de busqueda de aplicacion base-->
     <p:dialog id="dlgApp" header="Busqueda" widgetVar="wdgApp" modal="true" width="750" style="font-size: smaller">
         <h:form>
-            <p:dataTable id="dataApp" var="app" value="#{topPopularityBean.lstApp}" emptyMessage="No hay datos." scrollable="true" scrollWidth="100%" scrollHeight="500">
+            <p:dataTable id="dataApp" var="app" value="#{topPopularityBean.lstApp}" emptyMessage="No data." scrollable="true" scrollWidth="100%" scrollHeight="500">
                 <f:facet name="header">
-                    Aplicaciones
+                    Users
                 </f:facet>
-                <p:column headerText="Codigo" filterBy="#{app.appCodigo}" filterMatchMode="contains" style="width: 150px;text-align: center">
+                <p:column headerText="Id" filterBy="#{app.appCodigo}" filterMatchMode="contains" style="width: 150px;text-align: center">
                     <p:outputLabel value="#{app.appCodigo}"/>
                 </p:column>
-                <p:column headerText="Descripcion" filterBy="#{app.appDescripcion}" filterMatchMode="contains">
+                <p:column headerText="Name" filterBy="#{app.appDescripcion}" filterMatchMode="contains">
                     <p:outputLabel value="#{app.appDescripcion}"/>
                 </p:column>
-                <p:column headerText="Seleccionar" style="width: 150px;text-align: center">
+                <p:column headerText="Select" style="width: 150px;text-align: center">
                     <p:commandButton icon="ui-icon-search" action="#{topPopularityBean.asignaApp(app)}" update=":form" oncomplete="PF('wdgApp').hide()"/>
                 </p:column>
             </p:dataTable>

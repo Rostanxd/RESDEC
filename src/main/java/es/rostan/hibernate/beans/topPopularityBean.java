@@ -52,7 +52,7 @@ public class topPopularityBean {
         }
 
         System.out.println("Top Popularity: Terminado.");
-        FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO,"Sistema de Recomendación: Calculo terminado.","Exito"));
+        FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_INFO,"RESDEC: Finished calculation.","Exito"));
     }
 
     public void cargarAppsNuevas(){
